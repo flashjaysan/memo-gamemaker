@@ -173,13 +173,13 @@ Dans le panneau `ressources`, double cliquez sur l'object à éditer.
 La fonction `instance_create_layer` vous permet de créer une nouvelle instance d'un object sur un calque particulier. Elle prend en argument la position `x` et `y`, le nom d'un calque de la room active (sous forme de chaîne) et le nom de l'object à instancier.
 
 ```js
-instance_create_layer(x, y, "nom_de_calque", nom_game_object);
+instance_create_layer(x, y, "layer_name", object_name);
 ```
 
 **Remarque :** Le calque de l'object peut être directement accédé via la variable prédéfinie `layer`.
 
 ```js
-instance_create_layer(x, y, layer, nom_game_object);
+instance_create_layer(x, y, layer, object_name);
 ```
 
 ### Détruire une instance
@@ -187,7 +187,7 @@ instance_create_layer(x, y, layer, nom_game_object);
 La fonction `instance_destroy` vous permet de détruire une instance existante d'un game object. Sans argument, elle détruit l'instance du game object associée à ce script.
 
 ```js
-instance_destroy(); // détruit l'instance du game object possédant ce script
+instance_destroy(); // détruit l'instance de l'object possédant ce script
 ```
 
 Elle peut également prendre l'id d'une instance particulière à détruire.
@@ -199,7 +199,7 @@ instance_destroy(id_instance);
 Enfin, elle peut également prendre le nom d'un game object. Dans ce cas, toutes les instances de ce game object sont détruites.
 
 ```js
-instance_destroy(nom_game_object);
+instance_destroy(object_name);
 ```
 
 ### Créer une instance
@@ -207,18 +207,18 @@ instance_destroy(nom_game_object);
 Pour créer une instance sur un calque spécifique :
 
 ```js
-var instance_id = instance_create_layer(x, y, "nom_de_calque", game_object);
+var instance_id = instance_create_layer(x, y, "layer_name", object_name);
 ```
 Pour créer une instance sur le calque du game object contenant ce script :
 
 ```js
-var instance_id = instance_create_layer(x, y, layer, game_object);
+var instance_id = instance_create_layer(x, y, layer, object_name);
 ```
 
 Pour créer une instance sur un nouveau calque (qui n'est pas accessible) à une profondeur donnée (entre -16000 (devant) et 16000 (derrière)) :
 
 ```js
-var instance_id = instance_create_depth(x, y, profondeur, game_object);
+var instance_id = instance_create_depth(x, y, depth, object_name);
 ```
 
 ### Détruire une instance
@@ -226,7 +226,7 @@ var instance_id = instance_create_depth(x, y, profondeur, game_object);
 ```js
 instance_destroy(); // détruit l'instance attachée à ce script
 instance_destroy(instance_id); // détruit l'instance instance_id
-instance_destroy(game_object); // détruit toutes les instances de game_object existantes dans la Room
+instance_destroy(object_name); // détruit toutes les instances d'object_name existantes dans la room
 ```
 
 ### Vérifier si une instance existe
@@ -251,7 +251,7 @@ Utilisez la fonction `place_meeting` qui prend la position à tester et le nom d
 La fonction `instance_number` vous permet de savoir combien d'instances d'un game object spécifique passé en paramètre existent dans la Room.
 
 ```js
-if (instance_number(nom_game_object) > limite)
+if (instance_number(object_name) > limit)
 {
     // instructions
 }
@@ -270,7 +270,7 @@ La fonction `move_towards_point` (à placer dans un évènement `Create` par exe
 - Le dernier paramètre correspond à la vitesse à laquelle doit se déplacer l'instance.
 
 ```js
-move_towards_point(position_x, position_y, vitesse);
+move_towards_point(position_x, position_y, object_speed);
 ```
 
 ## Retourner ou redimensionner un Sprite
@@ -338,42 +338,61 @@ Un booléen peut valoir `false` ou `true`.  Ces valeurs sont équivalentes aux v
 GameMaker Studio 2  ne fait pas de distinction entre les nombres entiers et les nombres à virgules.
 
 ```js
-var dix = 10;
-var demi = 0.5;
-var dix_et_demi = dix + demi;
+var ten = 10;
+var half = 0.5;
+var ten_and_half = ten + half;
 ```
 
 Les littéraux chaînes sont écrits entre guillemets doubles.
 
 ```js
-var bonjour = "bonjour";
+var hello = "bonjour";
 ```
 
 Vous pouvez concaténer plusieurs chaînes avec l'opérateur ``.
 
 ```js
-var bonjour = "bonjour";
-var nom = "Steve";
-var message = bonjour + ", " + nom + ".";
+var hello = "bonjour";
+var name = "Steve";
+var greeting = hello + ", " + name + ".";
 ```
 
 Vous pouvez convertir un nombre en chaîne grâce à la fonction `string`.
 
 ```js
-var nombre = 10.5;
-var chaine = string(nombre);
+var number = 10.5;
+var string_number = string(number);
 ```
 
 Vous pouvez convertir une chaîne en nombre grâce à la fonction `real`.
 
 ```js
-var texte = "10";
-var dix = real(texte);
+var text = "10";
+var ten = real(text);
 ```
 
 ### Afficher un message
 
 La fonction `show_message` prend une chaîne de caractères en paramètre et l'affiche dans une boîte de dialogue lorsque l'évènement associé se déclenche.
+
+**Conseil :** Evitez d'utilisez cette fonction au profit de la fonction `draw_text` qui affiche du texte directement dans l'écran de jeu.
+
+### Afficher du texte
+
+La fonction `draw_text` vous permet d'afficher du texte dans l'écran de jeu. Le texte est affiché avec la font et dans la couleur actuellement sélectionnées. Par défaut, c'est une font de type `Arial` de taille `10` et de couleur blanche qui est active. Utilisez cette fonction dans un évènement `Draw` ou `Draw GUI`.
+
+- Le premier paramètre correspond à la position horizontale du texte à afficher.
+- Le deuxième paramètre correspond à la position verticale du texte à afficher.
+- Le troisième paramètre correspond au texte à afficher.
+
+**Remarque :** La fonction `draw_text_transformed` propose d'afficher du texte avec plus de contrôle.
+
+- Le premier paramètre correspond à la position horizontale du texte à afficher.
+- Le deuxième paramètre correspond à la position verticale du texte à afficher.
+- Le troisième paramètre correspond au texte à afficher.
+- Le quatrième paramètre correspond à l'échelle horizontale à appliquer au texte à afficher.
+- Le cinquième paramètre correspond à l'échelle verticale à appliquer au texte à afficher.
+- Le sixième paramètre correspond à l'angle d'inclinaison à appliquer au texte à afficher.
 
 ### Saisie de l'utilisateur
 
@@ -383,7 +402,7 @@ La fonction `get_string` affiche une boîte de dialogue proposant à l'utilisate
 - Le second paramètre correspond à la chaîne de caractères utilisée par défaut et affichée dans le champ de saisie.
 
 ```js
-var nom = get_string("Saisissez votre nom :", "Steve");
+var name = get_string("Saisissez votre nom :", "Steve");
 ```
 
 La fonction `get_integer` affiche une boîte de dialogue proposant à l'utilisateur de saisir un nombre entier que vous pouvez ensuite utiliser dans votre jeu.
@@ -392,10 +411,12 @@ La fonction `get_integer` affiche une boîte de dialogue proposant à l'utilisat
 - Le second paramètre correspond à un nombre utilisé par défaut et affiché dans le champ de saisie.
 
 ```js
-var age = get_string("Saisissez votre age :", 18);
+var age = get_integer("Saisissez votre age :", 18);
 ```
 
 **Remarque :** L'utilisateur peut également saisir un nombre à virgule.
+
+Les fonctions `get_integer_async` et `get_string_async` fonctionnent de la même manière mais de manière asynchrone. Le jeu continue à s'exécuter même si la saisie n'est pas terminée. Pour cela ces fonction renvoie un identifiant associé à un objet de type `ds_map`. Consultez la documentation sur ces fonctions.
 
 ### Variables
 
@@ -417,8 +438,8 @@ Une *variable d'instance* est une variable associée à une instance d'un object
 - Créez une variable d'instance dans l'évènement `Create` en lui affectant une valeur. Vous pouvez ensuite y accéder ou la modifier depuis n'importe quel autre évènement de l'instance. 
 
 ```js
-depart_x = 10;
-arrivee_x = 20;
+start_x = 10;
+end_x = 20;
 ```
 
 #### Variables locales
@@ -428,18 +449,28 @@ Une variable locale est une variable utilisable uniquement dans un seul script. 
 - Créez une variable locale en la faisant précéder du mot clé `var`.
 
 ```js
-var longueur = arrivee_x - depart_x;
+var length = start_x - end_x;
 ```
 
 #### Variables globales
 
 Une variable globale est une variable accessible depuis l'ensemble des scripts du jeu. Elle s'affiche en rose dans l'éditeur de GameMaker Studio 2.
 
-- Créez une variable globale en ajoutant une sous variable à la variable prédéfinie `global`.
+- Créez une variable globale en ajoutant une sous-variable à la variable prédéfinie `global`.
 
 ```js
-global.meilleur_score = 100;
+global.hiscore = 100;
 ```
+
+#### Variables globales prédéfinies
+
+GameMaker Studio 2 fournit trois variables globales prédéfinies.
+
+- `score` correspond au score général du joueur.
+- `health` correspond aux points de vie du joueur.
+- `lives` correspond au nombre de vies du joueur.
+
+**Attention !** La documentation déconseille d'utiliser ces variables.
 
 ### Macros
 
@@ -492,7 +523,7 @@ enum nom_enum {
 Utilisez une constante en la faisant précéder du nom de l'énumération et d'un point. Comme ce sont des constantes, vous ne pouvez pas modifier leur valeur.
 
 ```js
-une_variable = nom_enum.CONSTANTE_2;
+variable_name = nom_enum.CONSTANTE_2;
 ```
 
 **Remarque :** Comme ces constantes sont des valeurs entières, vous pouvez vous en servir comme des indices de tableaux.
@@ -505,13 +536,15 @@ une_variable = nom_enum.CONSTANTE_2;
 - `*` : s'applique sur deux nombres et donne un nombre. Calcule le produit de ses opérandes.
 - `/` : s'applique sur deux nombres et donne un nombre. Calcule la division de ses opérandes.
 - `%` : s'applique sur deux nombres et donne un nombre. Calcule le reste de la division de ses opérandes.
+- `mod` : s'applique sur deux nombres et donne un nombre. Calcule le reste de la division entière de ses opérandes.
+- `div` : s'applique sur deux nombres et donne un nombre. Calcule le quotient de la division entière de ses opérandes.
 - `<` : s'applique sur deux nombres et donne un booléen. Vrai si le premier opérande est inférieur au second opérande.
 - `<=` : s'applique sur deux nombres et donne un booléen. Vrai si le premier opérande est inférieur ou égale au second opérande.
 - `>` : s'applique sur deux nombres et donne un booléen. Vrai si le premier opérande est supérieur au second opérande.
 - `>=` : s'applique sur deux nombres et donne un booléen. Vrai si le premier opérande est supérieur ou égal au second opérande.
 - `==` : s'applique sur deux nombres et donne un booléen. Vrai si le premier opérande est égal au second opérande.
 - `!=` : s'applique sur deux nombres et donne un booléen. Vrai si le premier opérande est différent du second opérande.
-- `!` : donne un booléen correspondant à la négation de son opérande booléen (inverse la valeur de l'opérande).
+- `!` ou `not` : donne un booléen correspondant à la négation de son opérande booléen (inverse la valeur de l'opérande).
 - `&&` ou `and` : s'applique sur deux booléens et donne un booléen. Vrai si les deux opérandes sont vrais.
 - `||` ou `or` : s'applique sur deux booléens et donne un booléen. Vrai si au moins un des deux opérandes est vrai.
 - `^^` : s'applique sur deux booléens et donne un booléen. Vrai un seul des deux opérandes est vrai.
@@ -519,21 +552,21 @@ une_variable = nom_enum.CONSTANTE_2;
 ### Affectation simple et composée
 
 ```js
-nom_de_variable = valeur;
-nom_de_variable += valeur;
-nom_de_variable -= valeur;
-nom_de_variable *= valeur;
-nom_de_varialbe /= valeur;
-nom_de_variable %= valeur;
+variable_name = valeur;
+variable_name += valeur;
+variable_name -= valeur;
+variable_name *= valeur;
+variable_name /= valeur;
+variable_name %= valeur;
 ```
 
 ### Incrémentation et décrémentation
 
 ```js
-nom_de_variable++;
-++nom_de_variable;
-nom_de_variable--;
---nom_de_variable;
+variable_name++;
+++variable_name;
+variable_name--;
+--variable_name;
 ```
 
 ### Instruction conditionnelle
@@ -646,15 +679,15 @@ some_function();
 Si vous avez besoin de passer des arguments, utilisez le mot clé `argument` suivi d'un nombre correspondant au numéro de l'argument (à partir de zéro).
 
 ```js
-var some_local_variable = argument0;
+var local_variable = argument0;
 ```
 
 Vous pouvez également définir un commentaire de documentation pour indiquer un nom plus parlant au paramètre attendu. Il s'affichera dans l'aide de GameMaker Studio 2.
 
 ```js
-///@param name_of_parameter
+///@param parameter_name
 
-var name_of_parameter = argument0;
+var parameter_name = argument0;
 ```
 
 ### Effets de particules
@@ -772,58 +805,95 @@ else
 
 ### Contrôles
 
+#### Souris
+
+##### Position du pointeur
+
+GameMaker Studio 2 définit deux variables prédéfinies (en lecture seule) pour indiquer la position du pointeur de la souris. Elle peuvent être utilisées sur des appareils tactiles dans le cas de touchers uniques.
+
+- `mouse_x` contient la coordonnée X de la souris dans la room.
+- `mouse_y` contient la coordonnée Y de la souris dans la room.
+
+##### Appui d'un bouton de souris
+
+GameMaker Studio 2 fournit trois fonctions pour vérifier si un bouton de souris est enfoncé ou non.
+
+- La fonction `mouse_check_button_pressed` renvoie un booléen indiquant si un bouton de souris vient d'être cliqué. Equivalent à l'évènement `Mouse -> X Pressed`.
+- La fonction `mouse_check_button_released` renvoie un booléen indiquant si un bouton de souris vient d'être relâché. Equivalent à l'évènement `Mouse -> X Released`.
+- La fonction `mouse_check_button` renvoie un booléen indiquant si un bouton de souris est cliqué.  Equivalent à l'évènement `Mouse -> X Down`.
+
+##### Constantes prédéfinies liées à la souris
+
+Les fonctions précédents prennent en argument une des constantes prédéfinies par GameMaker Studio 2.
+
+- `mb_left` correspond au bouton gauche de la souris.
+- `mb_middle` correspond au bouton du milieu de la souris.
+- `mb_right` correspond au bouton droit de la souris.
+- `mb_none` correspond à aucun bouton de la souris.
+- `mb_any` correspond à n'importe quel bouton de la souris.
+
 #### Clavier
 
-##### Constantes du clavier virtuel
+#### Appui d'une touche du clavier
 
-- vk_nokey : keycode representing that no key is pressed
-- vk_anykey : keycode representing that any key is pressed
-- vk_left : keycode for left arrow key
-- vk_right : keycode for right arrow key
-- vk_up : keycode for up arrow key
-- vk_down : keycode for down arrow key
-- vk_enter : enter key
-- vk_escape : escape key
-- vk_space : space key
-- vk_shift : either of the shift keys
-- vk_control : either of the control keys
-- vk_alt : alt key
-- vk_backspace : backspace key
-- vk_tab : tab key
-- vk_home : home key
-- vk_end : end key
-- vk_delete : delete key
-- vk_insert : insert key
-- vk_pageup : pageup key
-- vk_pagedown : pagedown key
-- vk_pause : pause/break key
-- vk_printscreen : printscreen/sysrq key
-- vk_f1 ... vk_f12 : keycode for the function keys F1 to F12
-- vk_numpad0 ... vk_numpad9 : number keys on the numeric keypad
-- vk_multiply : multiply key on the numeric keypad
-- vk_divide : divide key on the numeric keypad
-- vk_add : add key on the numeric keypad
-- vk_subtract : subtract key on the numeric keypad
-- vk_decimal : decimal dot keys on the numeric keypad
+GameMaker Studio 2 fournit trois fonctions pour vérifier si une touche du clavier est enfoncée ou non.
 
-##### Associer une touche à un évènement
+- La fonction `keyboard_check_button_pressed` renvoie un booléen indiquant si une touche du clavier vient d'être enfoncée. Equivalent à l'évènement `Key Pressed -> X`.
+- La fonction `keyboard_check_button_released` renvoie un booléen indiquant si une touche du clavier vient d'être relâché. Equivalent à l'évènement `Key Up -> X`.
+- La fonction `keyboard_check_button` renvoie un booléen indiquant si une touche du clavier est enfoncée. Equivalent à l'évènement `Key Down -> X`.
 
-La fonction `keyboard_set_map` vous permet d'associer une touche du clavier à une autre. Cela vous permet de combiner plusieurs touches du clavier à un seul évènement et cela vous évite de dupliquer du code. Enfin, cela évite que plusieurs évènements se déclenchent et éxécutent plusieurs fois le même code. Le premier paramètre correspond à une touche réelle du clavier (accessible via la fonction `ord` qui prend en paramètre une chaîne correspondant à une touche). Le dernier paramètre correspond à une constante associée à une touche du clavier virtuel.
+##### Constantes prédéfinies liées au clavier
+
+Les fonctions précédents prennent en argument une des constantes prédéfinies par GameMaker Studio 2.
+
+- `vk_nokey` correspond à aucune touche du clavier.
+- `vk_anykey` correspond à n'importe quelle touche du clavier.
+- `vk_left` correspond à la touche flèche gauche du clavier.
+- `vk_right` correspond à la touche flèche droite du clavier.
+- `vk_up` correspond à la touche flèche haute du clavier.
+- `vk_down` correspond à la touche flèche basse du clavier.
+- `vk_enter` correspond à la touche `Entrée` du clavier.
+- `vk_escape` correspond à la touche `Echap` du clavier.
+- `vk_space` correspond à la touche `Espace` du clavier.
+- `vk_shift` correspond à une des touches `Shift` du clavier.
+- `vk_control` correspond à une des touches `Control` du clavier.
+- `vk_alt` correspond à la touche `Alt` du clavier.
+- `vk_backspace` correspond à la touche `Del` du clavier.
+- `vk_tab` correspond à la touche `Tab` du clavier.
+- `vk_home` ??????????????????.
+- `vk_end` correspond à la touche `Fin` du clavier.
+- `vk_delete` correspond à la touche `Suppr` du clavier.
+- `vk_insert` correspond à la touche `Inser` du clavier.
+- `vk_pageup` correspond à la touche PageHaut` du clavier.
+- `vk_pagedown` correspond à la touche `PageBas` du clavier.
+- `vk_pause` correspond à la touche `Pause` du clavier.
+- `vk_printscreen` correspond à la touche `Impécr` du clavier.
+- `vk_f1` ... `vk_f12` correspond à l'une des touches de fonction du clavier (`F1` à `F12`).
+- `vk_numpad0` ... `vk_numpad9` correspond à l'une des touches du pavé numérique du clavier (`0` à `9`).
+- `vk_multiply` correspond à la touche `*` du pavé numérique du clavier.
+- `vk_divide` correspond à la touche `/` du pavé numérique du clavier.
+- `vk_add` correspond à la touche `+` du pavé numérique du clavier.
+- `vk_subtract` correspond à la touche `-` du pavé numérique du clavier.
+- `vk_decimal` correspond à la touche `.` du pavé numérique du clavier.
+
+##### Touches alphanumériques du clavier
+
+GameMaker Studio 2 ne définit pas de constante prédéfinie pour les touches alphanumériques du clavier (`A` à `Z` et `0` à `9`). Pour désigner une touche alphanumérique, utiliser la fonction `ord` en lui passant en argument une chaîne contenant la lettre en majuscule ou le chiffre de la touche correspondante.
+
+```js
+if (keyboard_check_button(ord("A"))) {
+	// instructions
+}
+```
+
+**Remarque :** Normalement, la fonction `ord` convertit une chaîne en une version *UTF-8* mais pour la gestion du clavier, on lui passe une seule lettre majuscule ou un seul chiffre.
+
+##### Associer une touche du clavier à une autre
+
+La fonction `keyboard_set_map` vous permet d'associer une touche du clavier à une autre. Cela vous permet de combiner plusieurs touches du clavier à un seul évènement et cela vous évite de dupliquer du code. Enfin, cela évite que plusieurs évènements se déclenchent et exécutent plusieurs fois le même code. Le premier paramètre correspond à une touche réelle du clavier (accessible via la fonction `ord` qui prend en paramètre une chaîne correspondant à une touche). Le dernier paramètre correspond à une constante associée à une touche du clavier virtuel.
 
 ```js
 keyboard_set_map(ord("W"), vk_up);
-```
-
-#### Convertir une direction en un nombre
-
-```js
-number = round(direction / 90);
-```
-
-ou
-
-```js
-number = round(direction / 45);
 ```
 
 #### Gamepads
@@ -922,31 +992,25 @@ if (buttonAPressed)
 
 ### Génération aléatoire
 
-Par défaut, GameMaker Studio 2 génère des nombres aléatoire avec la même graine (*seed*). Cela produit à chaque exécution du jeu la même suite de valeurs. Pour réellement générer des suites de nombres aléatoires, appelez la fonction `randomize` avant d'utiliser les fonctions suivantes.
+Par défaut, GameMaker Studio 2 génère des nombres aléatoire avec la même graine (*seed*). Cela produit à chaque exécution du jeu la même suite de valeurs. Pour réellement générer des suites de nombres aléatoires, appelez la fonction `randomize` (ou `randomise`) avant d'utiliser les fonctions suivantes.
 
 ```js
 randomize();
 ```
 
-La fonction `random` sans argument génère un nombre à virgule compris entre 0 et 1.
+La fonction `random` avec un argument génère un nombre à virgule compris entre 0 et le paramètre (non inclus).
 
 ```js
-random_number = random(); // génère un nombre entre 0 et 1
+random_number = random(20); // génère un nombre entre 0 et 19.99999
 ```
 
-La fonction `random` avec un argument génère un nombre à virgule compris entre 0 et le paramètre.
+La fonction `irandom` avec un argument entier génère un nombre entier compris entre 0 et le paramètre (inclus).
 
 ```js
-random_number = random(20); // génère un nombre entre 0 et 20
+random_number = irandom(20); // génère un nombre entier entre 0 et 20
 ```
 
-La fonction `irandom` avec un argument entier génère un nombre entier compris entre 0 et le paramètre.
-
-```js
-random_number = irandom(20); // génère un nombre entre 0 et 20
-```
-
-La fonction `irandom_range` prend deux entiers en arguments et génère un nombre entier compris entre le premier argument et le second.
+La fonction `irandom_range` prend deux entiers en arguments et génère un nombre entier compris entre le premier argument et le second (inclus).
 
 ```js
 random_number = irandom_range(10, 20); // génère un nombre entre 10 et 20
@@ -1058,6 +1122,10 @@ La fonction `audio_play_sound` vous permet de lancer la lecture d'un son ou d'un
 indice_de_son = audio_play_sound(nom_de_son, 1, true);
 ```
 
+#### Vérifier qu'un son est en lecture
+
+La fonction `audio_is_playing` renvoie un booléen indiquant si un son est en lecture. Elle prend en argument le nom de la ressource de type `Sound` à tester.
+
 #### Modifier le gain
 
 La fonction `audio_sound_gain` vous permet de faire une interpolation sur le gain (l'amplitude) d'un son en lecture.
@@ -1074,7 +1142,7 @@ audio_sound_gain(indice_de_son, gain_cible, durée);
 
 ### L'évènement Draw
 
-Avant toute chose, appelez la fonction `draw_self` sinon le game object ne s'affichera pas.
+Avant toute chose, si l'object contient un sprite à afficher, appelez la fonction `draw_self` sinon le sprite ne s'affichera pas.
 
 ```js
 draw_self();
@@ -1703,9 +1771,9 @@ Une fois que vous n'avez plus besoin d'utiliser le fichier *INI*, n'oubliez pas 
 ini_close();
 ```
 
-### Divers
+## Divers
 
-#### Redémarrer le jeu
+### Redémarrer le jeu
 
 La fonction `game_restart` vous permet de redémarrer votre jeu.
 
@@ -1713,7 +1781,7 @@ La fonction `game_restart` vous permet de redémarrer votre jeu.
 game_restart();
 ```
 
-#### Quitter le jeu
+### Quitter le jeu
 
 La fonction `game_end` vous permet de quitter le jeu.
 
@@ -1724,7 +1792,7 @@ if keyboard_check_pressed(vk_escape)
 }
 ```
 
-#### Propriétés de viewports
+### Propriétés de viewports
 
 - `view_xview[numero_viewport]` : correspond à la position horizontale du côté gauche du rectangle de viewport numéro `numero_viewport`.
 - `view_yview[numero_viewport]` : correspond à la position verticale du côté supérieur du rectangle de viewport numéro `numero_viewport`.
@@ -1750,7 +1818,7 @@ draw_rectangle(
 - La surface d'application est mise à l'échelle de la fenêtre (ou de l'écran si le jeu est en plein écran). La surface d'application conserve ses proportions et des bandes noires apparaissent su les proportions de la surface d'application et celles de la fenêtre ou de l'écran sont différentes.
 - Un calque GUI est affiché par dessus la surface d'application et est étirée (il peut être déformée) sur la surface d'application.
 
-#### Résolution
+### Résolution
 
 Les fonctions `display_get_width` et `display_get_height` renvoie la largeur et la hauteur de la résolution de l'écran principal de l'appareil.
 
@@ -1762,7 +1830,7 @@ La fonction `window_center` positionne la fenêtre de jeu au centre de l'écran 
 
 **Remarque :** Vous ne pouvez pas centrer une fenêtre dont vous avez modifié les dimensions dans la même étape. Attendez le prochain rafraichissement d'affichage pour le faire.
 
-#### La surface d'application
+### La surface d'application
 
 GameMaker Studio 2 affiche le jeu sur une surface spécifique référencée par une variable prédéfinie appelée `application_surface`. Cette surface sert de base à tous les évènements `Draw` des objects et est automatiquement remise à l'échelle de la fenêtre. Les proportions de la surface d'application sont conservées et des bandes noires sont affichées sur les côtés si nécessaire. En revanche, si la room définit un viewport, la vue du viewport est étirée sur la fenêtre et peut provoquer des déformations.
 
@@ -1772,7 +1840,7 @@ Vous pouvez obtenir ses dimensions avec les fonctions `surface_get_width` et `su
 
 Vous pouvez modifier ses dimensions avec la fonction `surface_resize` en passant cette surface prédéfinie, la nouvelle largeur et la nouvelle hauteur.
 
-#### Le calque GUI
+### Le calque GUI
 
 Par dessus la surface d'application, un calque GUI sert de base aux évènements `Draw GUI` des objects. Ce calque apparaît au dessus de tous les autres éléments et ne dépend pas d'un viewport.
 
@@ -1784,7 +1852,7 @@ Vous pouvez modifier ses dimensions avec la fonction `display_set_gui_size` en p
 
 **Remarque :** Vous pouvez définir les dimensions de ce calque avec une résolution HD même si votre jeu est en pixel art.
 
-## Bitmap fonts
+### Bitmap fonts
 
 Commencez par importer votre bitmap font.
 
@@ -1806,11 +1874,14 @@ Créez un objet vide et définissez la bitmap font.
 
 Il vous suffit ensuite d'utiliser la fonction `draw_set_font` avec cette variable d'instance pour définir la bitmap font comme police à utiliser pour les affichages de textes.
 
+### Convertir une direction en un nombre
 
+```js
+number = round(direction / 90);
+```
 
+ou
 
-
-
-
-
-
+```js
+number = round(direction / 45);
+```
