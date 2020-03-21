@@ -9,11 +9,27 @@ GameMaker Studio 2 est un moteur de jeux vidéos multi-plateformes. Principaleme
 - La première approche appelée *Drag and drop* (*DND*) vous permet de manipuler et d'organiser visuellement des briques d'actions. Elle est destinée aux débutants.
 - La seconde approche utilise le langage de programmation *GameMaker Language* (*GML*) spécifique à GameMaker Studio 2. Cette approche est la plus utilisée car elle permet un contrôle plus précis des choses.
 
-## Système de coordonnées et angles
+## Concepts de base
 
-L'axe vertical (Y) augmente vers le bas. L'origine d'une room se trouve dans son coin supérieur gauche. Un angle de `0` degré pointe vers la droite. Les angles augmentent dans le sens anti-horaire (le sens inverse des aiguilles d'une montre).
+Dans GameMaker Studio 2, un jeu est essentiellement constitué de ressources appelées *rooms*. Ce sont les écrans ou niveaux de votre jeu. Chaque room comporte à son tour des *instances* de ressources appelées *objects*. Les objects définissent les interactions possibles dans votre jeu et les instances en sont des exemplaires indépendants interagissant dans une room.
 
-## Créer un nouveau projet
+**Remarque :** GameMaker Studio 2 fournit une room vide appelée `room0` pour tout nouveau projet.
+
+Les instances d'objects interagissent entre elles par le biais de programmes GML (ou d'actions DND mais cela revient au même) attachés à des *évènements*. Les évènements déclenchent l'exécution des programmes GML.
+
+Pour afficher quelque chose à l'écran, un object utilise généralement une ou plusieurs ressources appelées *sprites*. Les sprites correspondent aux éléments graphiques de votre jeu. Un sprite peut être une simple image fixe ou une série d'images animées.
+
+Les *sounds* correspondent aux éléments audio de votre jeu. Un sound peut représenter un son ou une musique.
+
+Les ressources object, sprite et sound sont les plus importantes mais GameMaker Studio 2 fournit de nombreux autres types de ressources pour vous aider à concevoir votre jeu.
+
+### Système de coordonnées et angles
+
+L'axe vertical (Y) augmente vers le bas. L'origine d'une room (à la coordonnée `(0, 0)`) se trouve dans son coin supérieur gauche. Un angle de `0` degré pointe vers la droite. Les angles augmentent dans le sens anti-horaire (le sens inverse des aiguilles d'une montre).
+
+## Gérer le projet
+
+### Créer un nouveau projet
 
 - Sur l'écran de démarrage, cliquez sur le bouton `New`. Si cet écran n'est pas visible, vous pouvez également utiliser le menu `File -> New Project` ou les touches `CTRL+N`.
 
@@ -23,17 +39,7 @@ L'axe vertical (Y) augmente vers le bas. L'origine d'une room se trouve dans son
 
 **Remarque :** Les actions *DND* sont converties automatiquement en *GML* lorsque vous exportez votre jeu. Vous pouvez à tout moment demander à voir la conversion en *GML* (sans convertir définitivement le script *DND*) en faisant un clic droit sur le script *DND* et en choisissant l'option `Live Preview`. Vous pouvez également demander la conversion définitive d'un script *DND* en faisant un clic droit sur l'évènement et en choisissant l'option `Convert to GML`.
 
-## Concepts de GameMaker Studio 2
-
-Dans GameMaker Studio 2, un jeu est essentiellement constitué de ressources appelées *rooms*. Ce sont les écrans ou niveaux de votre jeu. Chaque room comporte à son tour un ensemble de ressources appelées *objects*. Ce sont les objects qui définissent les interactions possibles dans votre jeu.
-
-**Remarque :** GameMaker Studio 2 fournit pour tout nouveau projet une room vide appelée `room0`.
-
--  Les objects interagissent entre elles par le biais de scripts *GML* (ou d'actions *DND* mais cela revient au même) attachés à des évènements. Pour afficher quelque chose à l'écran, un object a besoin d'une ressource sprite associée.
-- Les ressources appelées *sprites* correspondent aux éléments graphiques du jeu. Un sprite peut être une simple image fixe ou une série d'images animées.
-- Les ressources *sounds* correspondent aux éléments audio du jeu. Un sound peut représenter un son ou une musique.
-
-## Régler le nombre d'images par seconde
+### Régler le nombre d'images par seconde
 
 Pour ouvrir le menu de configuration du projet, cliquez sur le bouton `Game Options` ou, dans le panneau `Resources`, dans le dossier `Options`, double cliquez sur l'élément `Main`.
 
@@ -41,11 +47,11 @@ Paramétrez la fréquence de rafraichissement de l'écran de votre jeu (`60` par
 
 **Conseil :** Dans le panneau `Resources`, faites un clic droit sur le dossier `Scripts` et choisissez `Create Script` pour créer un nouveau script. Appelez-le `MACROS.` Dans ce script, saisissez l'instruction' `#macro FRAME_RATE 60`. Cela définit une constante symbolique `FRAME_RATE` dont la valeur est `60` que vous pourrez utiliser partout dans votre projet à la place de la valeur `60`. Si vous modifiez la fréquence de rafraichissement de l'écran de votre jeu, vous n'aurez à modifier cette valeur que dans ce script.
 
-##  Compiler et exécuter le jeu
+###  Compiler et exécuter le jeu
 
 Cliquez sur le bouton`Run`, cliquez sur le menu `Build -> Run` ou  appuyez sur la touche `F5`.
 
-## Définir la résolution du jeu
+### Définir la résolution du jeu
 
 Par défaut, GameMaker Studio 2 définit la résolution générale du jeu en se basant sur la taille de la première room existante dans le dossier `Rooms` du panneau `Resources`.
 
@@ -61,7 +67,11 @@ Vous pouvez également définir une résolution d'affichage du jeu différente d
 
 -  Utilisez les champs `Width` (largeur) et `Height` (hauteur) de la sous-section `Viewport Properties` de chaque viewport visible.
 
-## Créer des ressources
+## L'éditeur
+
+### Les ressources
+
+#### Créer une ressource
 
 Dans le panneau `Resources`, faites un clic droit sur un dossier correspondant à un type de ressource et choisissez l'option `Create X` (où `X` correspond au type de ressource à créer).
 
@@ -80,202 +90,69 @@ sound_jump
 room_level_1
 ```
 
-## Création et édition de sprites
+#### Ouvrir une ressource dans l'éditeur
+
+Dans le panneau `Resources`, double cliquez sur la ressource à éditer.
+
+### Les sprites
 
 Bien que vous puissiez utilisez les fonctions de dessin fournies par GameMaker Studio 2 pour afficher des formes géométriques à l'écran, vous aurez généralement besoin d'importer ou de créer des images pour afficher des choses à l'écran.
 
-GameMaker Studio 2 embarque un éditeur complet de sprites pour vous permettre de créer directement dans l'éditeur vos propre sprites. De plus, il vous permet d'importer des images facilement.
+GameMaker Studio 2 embarque un éditeur complet de sprites pour vous permettre de créer vos propre sprites directement dans l'éditeur. Il vous permet également d'importer facilement des fichiers images.
 
-### Créer un sprite vide
+#### Créer un sprite vide
 
 Faites un clic droit sur le dossier `Sprites` du panneau `Resources` et choisissez l'option `Create Sprite` ou appuyez sur les touches `ALT+S`.
 
-### Importer une image dans un sprite
+#### Importer une image dans un sprite
 
 Une fois un sprite vide créé, cliquez sur le bouton `Import` pour sélectionner un fichier image.
 
-### Créer un sprite à partir d'un fichier image
+#### Créer automatiquement un sprite à partir d'un fichier image
 
-Pour créer des sprites rapidement à partir de fichiers images, faites simplement cliquer les fichiers sur le dossier `Sprites` du panneau `Resources`.
+Pour créer des sprites automatiquement à partir de fichiers images, faites simplement glisser les fichiers sur le dossier `Sprites` du panneau `Resources`.
 
-Une animation au format `.gif` est automatiquement importée sous la forme d'une suite d'images composant l'animation.
+Une animation au format `.gif` est automatiquement importée sous la forme d'une suite d'images composant l'animation mais la couleur associée aux pixels transparents est importée telle quelle. Vous devrez donc supprimer manuellement ces pixels de couleur pour rétablir la transparence.
 
-Un fichier image au format `.png` dont le nom se termine par `_stripX` est automatiquement importé sous la forme d'une suite de `X` images. Les sous-images du fichier image d'origine doivent être disposées à la suite sur une seule ligne.
+Un fichier image au format `.png` dont le nom se termine par `_stripX` est automatiquement importé sous la forme d'une suite de `X` images. Les sous-images du fichier image d'origine doivent être disposées à la suite sur une seule ligne. Le format `.png` prend en charge la valeur alpha (l'opacité) des pixels. Les images sont donc importées sans retouches nécessaires dans GameMaker Studio 2.
 
-### Origine d'un sprite
+#### Origine d'un sprite
 
-Positionnez leur centre. 
+Lorsque vous affichez un sprite dans une room, vous indiquez sa position par rapport à un point spécifique dans votre image. L'éditeur vous permet de définir ce point d'origine. Par défaut, il est défini dans le coin supérieur gauche de l'image.
 
-### Zone de collision d'un sprite
+#### Zone de collision d'un sprite
 
-Définissez leur rectangle de collision.
+GameMaker Studio 2 fournit un ensemble de fonctions pour gérer les collisions entre différents sprites. Pour ces calculs, il vous faut définir une zone de collision pour chaque sprite. Vous avez le choix entre plusieurs options et vous pouvez même définir manuellement les limites de cette zone de collision.
 
-### Propriétés prédéfines d'un Sprite
+### Les rooms
 
-- `image_alpha` : correspond à l'opacité du Sprite (entre 0 et 1). Lecture et écriture.
-- `image_blend` : correspond à la teinte à appliquer au Sprite sous la forme d'une couleur (par défaut `c_white`). Lecture et écriture.
-- `image_index` : correspond à l'indice de l'image à afficher par le Sprite. Lecture et écriture.
-- `sprite_index` : correspond à l'index du Sprite définit dans l'arborescence `Resources`. Lecture et écriture.
-- `x_scale` : correspond à l'échelle horizontale du Sprite (par défaut 1). Lecture et écriture.
-- `y_scale` : correspond à l'échelle verticale du Sprite (par défaut 1). Lecture et écriture.
-- `image_speed` : correspond à la vitesse de lecture des images composant le Sprite. Lecture et écriture.
-- `image_width` : correspond à la largeur du Sprite. Lecture et écriture.
-- `image_height` : correspond à la hauteur du Sprite. Lecture et écriture.
-- `image_number` : correspond à ??????????????. Lecture et écriture.
-- `sprite_xoffset` : correspond au décalage horizontal de l'origine du Sprite par rapport au bord gauche.
-- `sprite_yoffset` : correspond au décalage vertical de l'origine du Sprite par rapport au bord supérieur.
-- `bbox_left` : correspond à la position horizontale du côté gauche de la boite de collision du Sprite.
-- `bbox_right` : correspond à la position horizontale du côté droit de la boite de collision du Sprite.
-- `bbox_top` : correspond à la position verticale du côté supérieur de la boite de collision du Sprite.
-- `bbox_bottom` : correspond à la position verticale du côté inférieur de la boite de collision du Sprite.
+#### Créer une room
 
-## Rooms
+Dans le panneau `Resources`, faites un clic droit sur le dossier `Rooms` puis sélectionnez `Create Room` ou appuyez sur les touches `ALT+R` pour créez une room.
 
-### Définir la couleur de fond
+#### Définir la couleur de fond
 
 Dans la section `Layers` du panneau `Room Editor`, définissez la couleur de fond du calque `Background`.
 
-## Objects
+### Les objects
 
-Dans le panneau `Resources`, faites un clic droit sur le dossier `Objects` puis sélectionnez `Create Object` ou les touches `ALT+O` pour créez un object.
+#### Créer un object
 
-### Attribuez un sprite à l'object créé.
+Dans le panneau `Resources`, faites un clic droit sur le dossier `Objects` puis sélectionnez `Create Object` ou appuyez sur les touches `ALT+O` pour créez un object.
 
-Pour attribuer des comportements associés aux évènements `Create` et `Step`.
-
-### Position d'une instance
-
-Les propriété `x` et `y` définissent la position de l'instance.
-
-### Editer les propriétés d'un object
+#### Editer un object
 
 Dans le panneau `ressources`, double cliquez sur l'object à éditer.
 
-### Propriétés prédéfinies d'un Object
+#### Attribuez un sprite à un object
 
-- `x` : correspond à la position horizontale de l'Object. Lecture et écriture.
-- `y` : correspond à la position verticale de l'Object. Lecture et écriture.
-- `id` : correspond à l'identifiant unique de l'instance de l'Object. Lecture seule.
-- `v_speed` : correspond à la vitesse horizontale de l'Object. Lecture et écriture.
-- `h_speed` : correspond à la vitesse verticale de l'Object. Lecture et écriture.
-- `speed` : correspond à la vitesse de l'Object sans direction. Lecture et écriture.
-- `direction` : correspond à la direction de mouvement de l'Object sous forme d'angle. Lecture et écriture.
-- `friction` : correspond à la force de frottement appliquée à de l'Object. Lecture et écriture.
-- `gravity` : correspond à la force de gravité appliquée à l'Object. Lecture et écriture.
-- `gravity_direction` : correspond à la direction de la gravité appliquée à l'Object. Lecture et écriture.
+Cliquez sur le bouton `No Sprite` pour sélectionner un sprite existant à attribuer à l'object. Vous pouvez également faire glisser un sprite depuis le panneau `Resources` vers ce bouton.
 
+### Les sounds
 
+#### Créer un sound
 
-## Scripting associé aux *instances* d'*objects*
-
-### Créer une instance
-
-La fonction `instance_create_layer` vous permet de créer une nouvelle instance d'un object sur un calque particulier. Elle prend en argument la position `x` et `y`, le nom d'un calque de la room active (sous forme de chaîne) et le nom de l'object à instancier.
-
-```js
-instance_create_layer(x, y, "layer_name", object_name);
-```
-
-**Remarque :** Le calque de l'object peut être directement accédé via la variable prédéfinie `layer`.
-
-```js
-instance_create_layer(x, y, layer, object_name);
-```
-
-### Détruire une instance
-
-La fonction `instance_destroy` vous permet de détruire une instance existante d'un game object. Sans argument, elle détruit l'instance du game object associée à ce script.
-
-```js
-instance_destroy(); // détruit l'instance de l'object possédant ce script
-```
-
-Elle peut également prendre l'id d'une instance particulière à détruire.
-
-```js
-instance_destroy(id_instance);
-```
-
-Enfin, elle peut également prendre le nom d'un game object. Dans ce cas, toutes les instances de ce game object sont détruites.
-
-```js
-instance_destroy(object_name);
-```
-
-### Créer une instance
-
-Pour créer une instance sur un calque spécifique :
-
-```js
-var instance_id = instance_create_layer(x, y, "layer_name", object_name);
-```
-Pour créer une instance sur le calque du game object contenant ce script :
-
-```js
-var instance_id = instance_create_layer(x, y, layer, object_name);
-```
-
-Pour créer une instance sur un nouveau calque (qui n'est pas accessible) à une profondeur donnée (entre -16000 (devant) et 16000 (derrière)) :
-
-```js
-var instance_id = instance_create_depth(x, y, depth, object_name);
-```
-
-### Détruire une instance
-
-```js
-instance_destroy(); // détruit l'instance attachée à ce script
-instance_destroy(instance_id); // détruit l'instance instance_id
-instance_destroy(object_name); // détruit toutes les instances d'object_name existantes dans la room
-```
-
-### Vérifier si une instance existe
-
-```js
-if (instance_exists(instance_id))
-{
-    // instructions
-}
-```
-
-## Editer les propriétés d'une instance
-
-Dans le panneau `Instances properties` ou dans la vue éditeur, double cliquez sur l'instance.
-
-## Tester si une instance entre en collision avec une instance d'un Object
-
-Utilisez la fonction `place_meeting` qui prend la position à tester et le nom de l'*Object*.
-
-### Déterminer le nombre d'instances d'un Object contenues dans une Room
-
-La fonction `instance_number` vous permet de savoir combien d'instances d'un game object spécifique passé en paramètre existent dans la Room.
-
-```js
-if (instance_number(object_name) > limit)
-{
-    // instructions
-}
-```
-
-### Déterminer si une instance est située en dehors de la Room
-
-L'évènement `Outside Room` se déclenche lorsqu'une instance sort des limites de la Room.
-
-### Déplacer automatiquement une instance vers un point
-
-La fonction `move_towards_point` (à placer dans un évènement `Create` par exemple) déplace automatiquement une instance vers un point.
-
-- Le premier paramètre correspond à la position horizontale du point vers lequel doit se diriger l'instance.
-- Le deuxième paramètre correspond à la position verticale du point vers lequel doit se diriger l'instance.
-- Le dernier paramètre correspond à la vitesse à laquelle doit se déplacer l'instance.
-
-```js
-move_towards_point(position_x, position_y, object_speed);
-```
-
-## Retourner ou redimensionner un Sprite
-
-Les propriétés `image_xscale` et `image_yscale` définissent le taux d'agrandissement du *Sprite*. Utilisez une valeur négative pour retourner le *Sprite* autour de son origine.
+Dans le panneau `Resources`, faites un clic droit sur le dossier `Sounds` puis sélectionnez `Create Sound` ou appuyez sur les touches `ALT+U` pour créez un sound.
 
 ## Evènements
 
@@ -320,20 +197,92 @@ alarm[0] = 1;
 
 ### Commentaires
 
+Les commentaires sont des morceaux de code qui sont ignorés par le compilateur. Ils servent essentiellement de moyen de communiquer pour les programmeurs. Vous pouvez vous en servir pour détailler certaines parties complexes de vos programmes (bien qu'il soit en général conseillé de faire un programme clair et lisible avant tout), séparer différentes parties ayant des rôles différents ou indiquer qu'une section n'est pas encore écrite. Vous pouvez également vous en servir pour désactiver temporairement un morceau de programme pour effectuer des tests.
+
 ```js
 // Commentaire de fin de ligne
-/// Commentaire de documentation
+```
+
+```js
 /*
 Commentaire
 multi-lignes
 */
 ```
 
+```js
+/// Commentaire de documentation
+```
+
+### Variables
+
+#### Variables prédéfinies
+
+GameMaker Studio 2 définit automatiquement certaines variables. Chaque room, chaque instance d'object et de nombreuses autres choses possèdent des variables prédéfinies. Elles s'affichent en vert dans l'éditeur de GameMaker Studio 2.
+
+**Attention !** Soyez attentif à la couleur des variables. Par exemple, la variable `speed` d'un object est une variable prédéfinie dans GameMaker Studio 2.  Si vous donnez à cette variable une valeur différente de `0`, chaque instance de cet object se déplacera automatiquement dans la direction définie par la variable `direction` (qui vaut par défaut `0` degrés, soit une direction vers la droite).
+
+```js
+x += 1;
+y += 1;
+```
+
+#### Variables d'instance
+
+Une variable d'instance est une variable associée à une instance d'un object. Elle peut être accédée ou être modifiée depuis n'importe quelle évènement de l'instance. Elle s'affiche en violet dans l'éditeur de GameMaker Studio 2. Pour éviter les erreurs, on la définit et on l'initialise généralement dans l'évènement `Create` d'un object.
+
+- Créez une variable d'instance dans l'évènement `Create` en lui affectant une valeur. Vous pouvez ensuite y accéder ou la modifier depuis n'importe quel autre évènement de l'instance. 
+
+```js
+start_x = 10;
+end_x = 20;
+```
+
+#### Variables locales
+
+Une variable locale est une variable utilisable uniquement dans un seul script. Chaque évènement définit un script différent. A la fin de l'exécution du programme, la variable est détruite. Elle s'affiche en jaune dans l'éditeur de GameMaker Studio 2.
+
+- Créez une variable locale en la faisant précéder du mot clé `var`.
+
+```js
+var length = start_x - end_x;
+```
+
+#### Variables globales
+
+Une variable globale est une variable accessible depuis l'ensemble des scripts de votre jeu. Elle s'affiche en rose dans l'éditeur de GameMaker Studio 2.
+
+- Créez une variable globale en ajoutant une sous-variable à la variable prédéfinie `global`.
+
+```js
+global.hiscore = 100;
+```
+
+#### Variables globales prédéfinies
+
+GameMaker Studio 2 fournit trois variables globales prédéfinies accessibles depuis l'ensemble des scripts de votre jeu.
+
+- `score` correspond au score général du joueur.
+- `health` correspond aux points de vie du joueur.
+- `lives` correspond au nombre de vies du joueur.
+
+**Attention !** La documentation déconseille d'utiliser ces variables.
+
+### Macros
+
+La directive `#macro` vous permet de définir une constante symbolique associée à une valeur. Cette constante peut alors être utilisée à la place de la valeur.
+
+```js
+#macro FRAME_RATE 60
+```
+
+**Conseil :** Créez une ressource script appelée `MACROS` et définissez vos constantes symboliques dans ce script. En faisant ainsi, toutes les constantes seront accessibles dans tous vos scripts.
+
 ### Types de base et conversion
 
 GameMaker Studio 2 utilise trois types de base. Les booléens, les nombres (entiers ou à virgule) et les chaînes de caractères.
 
-Un booléen peut valoir `false` ou `true`.  Ces valeurs sont équivalentes aux valeurs entières `0` et `1`.
+Un booléen peut valoir `false` (faux) ou `true` (vrai).  Ces valeurs sont équivalentes aux valeurs entières `0` et `1`.
 
 GameMaker Studio 2  ne fait pas de distinction entre les nombres entiers et les nombres à virgules.
 
@@ -416,84 +365,20 @@ var age = get_integer("Saisissez votre age :", 18);
 
 **Remarque :** L'utilisateur peut également saisir un nombre à virgule.
 
-Les fonctions `get_integer_async` et `get_string_async` fonctionnent de la même manière mais de manière asynchrone. Le jeu continue à s'exécuter même si la saisie n'est pas terminée. Pour cela ces fonction renvoie un identifiant associé à un objet de type `ds_map`. Consultez la documentation sur ces fonctions.
-
-### Variables
-
-#### Variables prédéfinies
-
-GameMaker Studio 2 définit automatiquement certaines variables. Chaque room, chaque instance d'object et de nombreuses autres choses possèdent des variables prédéfinies. Elles s'affichent en vert dans l'éditeur de GameMaker Studio 2.
-
-**Attention !** Soyez attentif à la couleur des variables. Par exemple, la variable `speed` d'un object est une variable prédéfinie dans GameMaker Studio 2.  Si vous donnez à cette variable une valeur différente de `0`, chaque instance de cet object se déplacera automatiquement dans la direction définie par la variable `direction` (par défaut `0`, soit vers la droite).
-
-```js
-x += 1;
-y += 1;
-```
-
-#### Variables d'instance
-
-Une *variable d'instance* est une variable associée à une instance d'un object. Elle peut être accédée ou être modifiée depuis n'importe quelle évènement de l'instance. Elle s'affiche en violet dans l'éditeur de GameMaker Studio 2. Pour éviter les erreurs, on la définit et on l'initialise généralement dans l'évènement `Create` d'un object.
-
-- Créez une variable d'instance dans l'évènement `Create` en lui affectant une valeur. Vous pouvez ensuite y accéder ou la modifier depuis n'importe quel autre évènement de l'instance. 
-
-```js
-start_x = 10;
-end_x = 20;
-```
-
-#### Variables locales
-
-Une variable locale est une variable utilisable uniquement dans un seul script. A la fin de l'exécution du script, la variable est détruite. Elle s'affiche en jaune dans l'éditeur de GameMaker Studio 2.
-
-- Créez une variable locale en la faisant précéder du mot clé `var`.
-
-```js
-var length = start_x - end_x;
-```
-
-#### Variables globales
-
-Une variable globale est une variable accessible depuis l'ensemble des scripts du jeu. Elle s'affiche en rose dans l'éditeur de GameMaker Studio 2.
-
-- Créez une variable globale en ajoutant une sous-variable à la variable prédéfinie `global`.
-
-```js
-global.hiscore = 100;
-```
-
-#### Variables globales prédéfinies
-
-GameMaker Studio 2 fournit trois variables globales prédéfinies.
-
-- `score` correspond au score général du joueur.
-- `health` correspond aux points de vie du joueur.
-- `lives` correspond au nombre de vies du joueur.
-
-**Attention !** La documentation déconseille d'utiliser ces variables.
-
-### Macros
-
-La directive `#macro` vous permet de définir une constante symbolique associée à une valeur. Cette constante peut alors être utilisée à la place de la valeur.
-
-```js
-#macro FRAME_RATE 60
-```
-
-**Conseil :** Créez un script appelé `MACROS` et définissez vos constantes symboliques dans ce script. En faisant ainsi, toutes les constantes seront accessibles dans tous vos scripts.
+Les fonctions `get_integer_async` et `get_string_async` fonctionnent de la même manière mais de manière asynchrone. Le jeu continue à s'exécuter même si la saisie n'est pas terminée. Pour cela ces fonctions renvoient un identifiant associé à un objet de type `ds_map`. Consultez la documentation sur ces fonctions pour plus d'information.
 
 ### Tableaux
 
 Utilisez un indice entre des crochets pour accéder aux éléments d'un tableau. Le premier élément est à l'indice `0`.
 
 ```js
-tableau[0] = valeur;
+tableau[indice] = valeur;
 ```
 
 Utilisez une liste d'indices séparés par une virgule pour manipuler un tableau à plusieurs dimensions.
 
 ```js
-tableau_deux_dimensions[0, 0] = valeur;
+tableau_deux_dimensions[indice_1, indice_2] = valeur;
 ```
 
 ### Énumérations
@@ -552,21 +437,21 @@ variable_name = nom_enum.CONSTANTE_2;
 ### Affectation simple et composée
 
 ```js
-variable_name = valeur;
-variable_name += valeur;
-variable_name -= valeur;
-variable_name *= valeur;
-variable_name /= valeur;
-variable_name %= valeur;
+nom_de_variable = valeur;
+nom_de_variable += valeur; // équivalent à nom_de_variable = nom_de_variable + valeur
+nom_de_variable -= valeur; // équivalent à nom_de_variable = nom_de_variable - valeur
+nom_de_variable *= valeur; // équivalent à nom_de_variable = nom_de_variable * valeur
+nom_de_variable /= valeur; // équivalent à nom_de_variable = nom_de_variable / valeur
+nom_de_variable %= valeur; // équivalent à nom_de_variable = nom_de_variable % valeur
 ```
 
 ### Incrémentation et décrémentation
 
 ```js
-variable_name++;
-++variable_name;
-variable_name--;
---variable_name;
+nom_de_variable++;
+++nom_de_variable;
+nom_de_variable--;
+--nom_de_variable;
 ```
 
 ### Instruction conditionnelle
@@ -661,9 +546,9 @@ do
 } until (condition);
 ```
 
-### Scripts et fonctions
+### Ressources scripts et fonctions
 
-Créez un script dans le dossier `Scripts` du panneau `Resources`.
+Créez une ressource script dans le dossier `Scripts` du panneau `Resources`.
 
 ```js
 // script some_function
@@ -689,6 +574,140 @@ Vous pouvez également définir un commentaire de documentation pour indiquer un
 
 var parameter_name = argument0;
 ```
+
+### Scripter les instances
+
+#### Propriétés prédéfinies d'une instance
+
+- `x` : correspond à la position horizontale de l'object. Lecture et écriture.
+- `y` : correspond à la position verticale de l'object. Lecture et écriture.
+- `id` : correspond à l'identifiant unique de l'instance de l'object. Lecture seule.
+- `v_speed` : correspond à la vitesse horizontale de l'object. Lecture et écriture.
+- `h_speed` : correspond à la vitesse verticale de l'object. Lecture et écriture.
+- `speed` : correspond à la vitesse de l'object sans direction. Lecture et écriture.
+- `direction` : correspond à la direction de mouvement de l'object sous forme d'angle. Lecture et écriture.
+- `friction` : correspond à la force de frottement appliquée à de l'object. Lecture et écriture.
+- `gravity` : correspond à la force de gravité appliquée à l'object. Lecture et écriture.
+- `gravity_direction` : correspond à la direction de la gravité appliquée à l'object. Lecture et écriture.
+
+#### Créer une instance
+
+Pour créer une instance sur un calque spécifique, utilisez la fonction `instance_create_layer`. Elle vous permet de créer une nouvelle instance d'un object sur un calque particulier. Elle prend en argument la position `x` et `y`, le nom d'un calque de la room active (sous forme de chaîne) et le nom de l'object à instancier.
+
+```js
+var identifiant_instance = instance_create_layer(x, y, "nom_de_calque", nom_object);
+```
+Pour créer une instance sur le calque du game object contenant ce script, utilisez la variable prédéfinie `layer`.
+
+```js
+var identifiant_instance = instance_create_layer(x, y, layer, nom_object);
+```
+
+Pour créer une instance sur un nouveau calque (qui n'est pas accessible) à une profondeur donnée (entre -16000 (devant) et 16000 (derrière)), utilisez la fonction `instance_create_depth`.
+
+```js
+var identifiant_instance = instance_create_depth(x, y, profondeur, nom_object);
+```
+
+Ces fonctions renvoie un identifiant unique de l'instance créée.
+
+#### Détruire une instance
+
+La fonction `instance_destroy` vous permet de détruire une instance existante d'un game object. Sans argument, elle détruit l'instance du game object associée à ce script.
+
+```js
+instance_destroy(); // détruit l'instance de l'object possédant ce script
+```
+
+Elle peut également prendre l'identifiant d'une instance particulière à détruire.
+
+```js
+instance_destroy(identifiant_instance);
+```
+
+Enfin, elle peut également prendre le nom d'un game object. Dans ce cas, toutes les instances de ce game object sont détruites.
+
+```js
+instance_destroy(nom_object);
+```
+
+#### Vérifier si une instance existe
+
+La fonction `instance_exists` vous permet de vérifier si une instance existe bien dans la room.
+
+```js
+if (instance_exists(identifiant_instance))
+{
+    // instructions
+}
+```
+
+#### Consulter les propriétés d'une instance dans une room
+
+Dans le panneau `Room Editor`, onglet `Instances Layer Properties` ou dans la vue éditeur, double cliquez sur l'instance.
+
+#### Tester si une instance entre en collision avec une autre instance
+
+Utilisez la fonction `place_meeting` qui prend la position à tester et le nom de l'object.
+
+```js
+if (place_meeting(x, y, nom_object))
+{
+    // instructions
+}
+```
+
+#### Déterminer le nombre d'instances d'un object contenues dans une Room
+
+La fonction `instance_number` vous permet de savoir combien d'instances d'un  object spécifique passé en paramètre existent dans la room.
+
+```js
+if (instance_number(nom_object) > limite)
+{
+    // instructions
+}
+```
+
+#### Déterminer si une instance est située en dehors de la room
+
+L'évènement `Outside Room` se déclenche lorsqu'une instance sort des limites de la room.
+
+#### Déplacer automatiquement une instance vers un point
+
+La fonction `move_towards_point` (à placer dans un évènement `Create` par exemple) déplace automatiquement une instance vers un point.
+
+- Le premier paramètre correspond à la position horizontale du point vers lequel doit se diriger l'instance.
+- Le deuxième paramètre correspond à la position verticale du point vers lequel doit se diriger l'instance.
+- Le dernier paramètre correspond à la vitesse à laquelle doit se déplacer l'instance.
+
+```js
+move_towards_point(position_x, position_y, vitesse_object);
+```
+
+### Sprites
+
+#### Retourner ou redimensionner un sprite
+
+Les propriétés `image_xscale` et `image_yscale` définissent le taux d'agrandissement du *Sprite*. Utilisez une valeur négative pour retourner le *Sprite* autour de son origine.
+
+#### Propriétés prédéfines des sprites
+
+- `image_alpha` : correspond à l'opacité du Sprite (entre 0 et 1). Lecture et écriture.
+- `image_blend` : correspond à la teinte à appliquer au Sprite sous la forme d'une couleur (par défaut `c_white`). Lecture et écriture.
+- `image_index` : correspond à l'indice de l'image à afficher par le Sprite. Lecture et écriture.
+- `sprite_index` : correspond à l'index du Sprite définit dans l'arborescence `Resources`. Lecture et écriture.
+- `x_scale` : correspond à l'échelle horizontale du Sprite (par défaut 1). Lecture et écriture.
+- `y_scale` : correspond à l'échelle verticale du Sprite (par défaut 1). Lecture et écriture.
+- `image_speed` : correspond à la vitesse de lecture des images composant le Sprite. Lecture et écriture.
+- `image_width` : correspond à la largeur du Sprite. Lecture et écriture.
+- `image_height` : correspond à la hauteur du Sprite. Lecture et écriture.
+- `image_number` : correspond au nombre d'images totales du sprite. Lecture et écriture.
+- `sprite_xoffset` : correspond au décalage horizontal de l'origine du Sprite par rapport au bord gauche.
+- `sprite_yoffset` : correspond au décalage vertical de l'origine du Sprite par rapport au bord supérieur.
+- `bbox_left` : correspond à la position horizontale du côté gauche de la boite de collision du Sprite.
+- `bbox_right` : correspond à la position horizontale du côté droit de la boite de collision du Sprite.
+- `bbox_top` : correspond à la position verticale du côté supérieur de la boite de collision du Sprite.
+- `bbox_bottom` : correspond à la position verticale du côté inférieur de la boite de collision du Sprite.
 
 ### Effets de particules
 
@@ -1022,89 +1041,89 @@ La fonction `choose` prend une suite d'arguments et renvoie aléatoirement un de
 prenom_aleatoire = choose("Sophie", "Sonia", "Marie", "Audrey", "Laetitia", "Dana");
 ```
 
-### Scripting associé aux *rooms*
+### Scripting associé aux rooms
 
-#### Dimensions d'une *Room*
+#### Dimensions d'une room
 
-Les variables prédéfinies `Room_width` et `Room_height` vous permettent de connaître les dimensions de la Room en cours.
+Les variables prédéfinies `room_width` et `room_height` vous permettent de connaître les dimensions de la room en cours.
 
 ```js
-random_x = irandom_range(0, Room_width);
-random_y = irandom_range(0, Room_height);
+random_x = irandom_range(0, room_width);
+random_y = irandom_range(0, room_height);
 ```
 
-#### Ajouter du code à une Room
+#### Ajouter du code à une room
 
-Ouvrez la Room à éditer. Dans le panneau `Properties`, cliquez sur le bouton `Creation Code` pour ouvrir le script associé à une Room. Vous pouvez par exemple utilisez la fonction `audio_play_sound`.
+Ouvrez la room à éditer. Dans le panneau `Properties`, cliquez sur le bouton `Creation Code` pour ouvrir le script associé à une room. Vous pouvez par exemple utilisez la fonction `audio_play_sound`.
 
-#### Organisation des Rooms
+#### Organisation des rooms
 
-GameMaker Studio 2 gère les Rooms en leur associant un indice selon leur organisation dans le panneau `Resources`. Dans ce panneau, vous pouvez déplacer les différentes Rooms par cliquer-glisser. Si vous cliquez-glissez une Room sur une autre, cette dernière s'illumine différemment selon la position du pointeur de la souris.
+GameMaker Studio 2 gère les rooms en leur associant un indice selon leur organisation dans le panneau `Resources`. Dans ce panneau, vous pouvez déplacer les différentes rooms par cliquer-glisser. Si vous cliquez-glissez une room sur une autre, cette dernière s'illumine différemment selon la position du pointeur de la souris.
 
-- Si le pointeur de la souris est sur la partie supérieure de la Room, la Room glissée sera placée au dessus de la Room située sous le pointeur de souris.
-- Si le pointeur de la souris est sur la partie inférieure de la Room, la Room glissée sera placée au dessous de la Room située sous le pointeur de souris.
-- Si le pointeur de la souris est sur la partie centrale de la Room, la Room glissée deviendra un enfant de la Room située sous le pointeur de souris. Elle héritera de ses propriétés.
+- Si le pointeur de la souris est sur la partie supérieure de la room, la room glissée sera placée au dessus de la room située sous le pointeur de souris.
+- Si le pointeur de la souris est sur la partie inférieure de la room, la Room glissée sera placée au dessous de la room située sous le pointeur de souris.
+- Si le pointeur de la souris est sur la partie centrale de la room, la room glissée deviendra un enfant de la room située sous le pointeur de souris. Elle héritera de ses propriétés.
 
-- La variable prédéfinie `Room` contient l'indice associé à la Room actuelle (en cours d'exécution).
-- La variable prédéfinie `Room_first` contient l'indice associé à la première Room dans la liste du panneau `Resources`.
-- La variable prédéfinie `Room_last` contient l'indice associé à la dernière Room dans la liste du panneau `Resources`.
+- La variable prédéfinie `room` contient l'indice associé à la room actuelle (en cours d'exécution).
+- La variable prédéfinie `room_first` contient l'indice associé à la première Room dans la liste du panneau `Resources`.
+- La variable prédéfinie `room_last` contient l'indice associé à la dernière Room dans la liste du panneau `Resources`.
 
-La fonction `Room_exist` prend un indice en paramètre et renvoie une booléen indiquant si une Room associé à l'indice existe bien ou non.
+La fonction `room_exist` prend un indice en paramètre et renvoie une booléen indiquant si une room associé à l'indice existe bien ou non.
 
 ```js
-if (Room_exist(indice_de_Room))
+if (room_exist(indice_de_room))
 {
-    Room_goto(indice_de_Room);
+    room_goto(indice_de_room);
 }
 ```
 
-La fonction `Room_next` prend un indice de Room en paramètre et renvoie l'indice de la Room suivante ou `-1` s'il n'y a pas de Room suivante.
+La fonction `room_next` prend un indice de room en paramètre et renvoie l'indice de la room suivante ou `-1` s'il n'y a pas de room suivante.
 
 ```js
-if (Room_next(Room) != -1)
+if (room_next(room) != -1)
 {
-    Room_goto_next();
+    room_goto_next();
 }
 ```
 
-La fonction `Room_previous` prend un indice de Room en paramètre et renvoie l'indice de la Room précédente ou `-1` s'il n'y a pas de Room précédente.
+La fonction `room_previous` prend un indice de room en paramètre et renvoie l'indice de la room précédente ou `-1` s'il n'y a pas de room précédente.
 
 ```js
-if (Room_previous(Room) != -1)
+if (room_previous(room) != -1)
 {
-    Room_goto_previous();
+    room_goto_previous();
 }
 ```
 
-La fonction `Room_restart` redémarre la Room actuelle comme si elle venait de se charger.
+La fonction `room_restart` redémarre la room actuelle comme si elle venait de se charger.
 
 ```js
-Room_restart();
+room_restart();
 ```
 
 **Remarque :** Cette instruction prend effet une fois que l'évènement qui la contient se termine. Le script exécute donc les instructions qui suivent avant de redémarrer l'écran de jeu.
 
-La fonction `Room_goto` vous permet de passer à une Room spécifique en passant l'indice associé à une Room en paramètre.
+La fonction `room_goto` vous permet de passer à une room spécifique en passant l'indice associé à une room en paramètre.
 
 ```js
-Room_goto(indice_de_Room);
+room_goto(indice_de_room);
 ```
 
-La fonction `Room_goto_next` vous permet de passer à la Room suivant celle actuelle dans le panneau `Resources`. Vérifiez qu'une Room existe bien après celle actuelle avant d'appeler cette fonction ou une erreur se produira.
+La fonction `room_goto_next` vous permet de passer à la room suivant celle actuelle dans le panneau `Resources`. Vérifiez qu'une room existe bien après celle actuelle avant d'appeler cette fonction ou une erreur se produira.
 
 ```js
-if (Room_exists(Room_next(Room)))
+if (room_exists(room_next(room)))
 {
-    Room_goto_next();
+    room_goto_next();
 }
 ```
 
-La fonction `Room_goto_previous` vous permet de passer à la Room précédant celle actuelle dans le panneau `Resources`. Vérifiez qu'une Room existe bien avant celle actuel avant d'appeler cette fonction ou une erreur se produira.
+La fonction `room_goto_previous` vous permet de passer à la room précédant celle actuelle dans le panneau `Resources`. Vérifiez qu'une room existe bien avant celle actuel avant d'appeler cette fonction ou une erreur se produira.
 
 ```js
-if (Room_exists(Room_previous(Room)))
+if (room_exists(room_previous(room)))
 {
-    Room_goto_previous();
+    room_goto_previous();
 }
 ```
 
@@ -1140,13 +1159,61 @@ audio_sound_gain(indice_de_son, gain_cible, durée);
 
 **Remarque :** Pour changer le gain instantannément, donnez une durée de 0.
 
-### L'évènement Draw
+### Dessin
+
+Utilisez les fonctions de dessin dans un évènement `Draw` d'un object si vous souhaitez dessiner directement dans la room ou `Draw GUI` si vous souhaitez dessiner sur une surface qui suit un viewport de caméra (vous n'aurez donc pas besoin de calculer le décalage de la caméra par rapport à la room).
 
 Avant toute chose, si l'object contient un sprite à afficher, appelez la fonction `draw_self` sinon le sprite ne s'affichera pas.
 
 ```js
 draw_self();
 ```
+
+#### Définir la couleur de dessin
+
+La fonction `draw_set_color` vous permet de définir la couleur à utiliser pour les fonctions de dessin suivantes. La couleur par défaut est blanche.
+
+```js
+draw_set_colour(couleur);
+```
+
+#### Couleurs
+
+La fonction `make_colour_rgb` renvoie un entier correspondant à une couleur. Elle prend trois arguments correspondant aux composantes rouge, verte et bleue (une valeur comprise entre 0 et 255) d'une couleur.
+
+```js
+var color = make_colour_rgb(rouge, vert, bleu);
+```
+
+**Remarque :** Il existe également la fonction `make_colour_hsv` qui fonctionne de la même manière que la fonction précédente mais dont les arguments correspondent à la teinte, la saturation et la luminosité d'une couleur.
+
+```js
+var colour = make_colour_hsv(teinte, saturation, luminosite);
+```
+
+##### Couleurs prédéfinies
+
+GameMaker Studio 2 propose un ensemble de constantes prédéfinies pour représenter un ensemble de couleurs spécifiques.
+
+- `c_aqua`
+- `c_black`
+- `c_blue`
+- `c_dkgray`
+- `c_fuchsia`
+- `c_gray`
+- `c_green`
+- `c_lime`
+- `c_ltgray`
+- `c_maroon`
+- `c_navy`
+- `c_olive`
+- `c_orange`
+- `c_purple`
+- `c_red`
+- `c_silver`
+- `c_teal`
+- `c_white`
+- `c_yellow`
 
 
 
@@ -1159,7 +1226,7 @@ draw_text(250, 280, "Highscore: " + string(global.highscore));
 ```
 
 
-
+#### Dessiner un sprite
 
 La fonction `draw_sprite` affiche un Sprite.
 
@@ -1188,7 +1255,7 @@ La fonction `draw_sprite_ext` affiche un Sprite. Elle possède plus de paramètr
 draw_sprite_ext(nom_sprite, indice, position_x, position_y, echelle_x, echelle_y, angle, couleur, alpha);
 ```
 
-### Barre de vie
+#### Dessiner une barre de vie
 
 La fonction `draw_healthbar` affiche une barre de vie. Elle doit être utilisée dans les évènements `Draw`.
 
@@ -1239,6 +1306,8 @@ y = lerp(y, objectif_y, 0.1)
 ```
 
 #### Easing
+
+SECTION A RETRAVAILLER
 
 ```js
 #define Default_Ease_Algorithms
@@ -1632,7 +1701,7 @@ if (argument0 < argument3*0.5)
 return (EaseOutBounce(argument0*2 - argument3, 0, argument2, argument3)*0.5 + argument2*0.5 + argument1);
 ```
 
-Voici un exemple d'animation utilisant l'*Easing* :
+Voici un exemple d'animation utilisant l'easing :
 
 That’s the end of all the easing functions I have. Let’s look at how you can use that in an example.
 
