@@ -9,6 +9,45 @@ GameMaker Studio 2 est un moteur de jeux vidéos multi-plateformes. Principaleme
 - La première approche appelée *Drag and drop* (*DND*) vous permet de manipuler et d'organiser visuellement des briques d'actions. Elle est destinée aux débutants.
 - La seconde approche utilise le langage de programmation *GameMaker Language* (*GML*) spécifique à GameMaker Studio 2. Cette approche est la plus utilisée car elle permet un contrôle plus précis des choses.
 
+## Versions de GameMaker Studio 2
+
+GameMaker Studio 2 est proposé en différentes versions.
+
+- La version **Trial** correspond à la version d'essai de GameMaker Studio 2. Vous devez vous inscrire sur le site de Yoyo Games et télécharger cette version.
+  - Vous bénéficiez de 30 jours d'utilisation à compter du jour de votre inscription.
+  - Vous ne pouvez pas exporter vos jeux.
+  - Vous ne pouvez pas désactiver la notification de la version d'essai.
+  - Vous ne pouvez pas créer de compte Marketplace Publisher mais vous pouvez utiliser votre compte Yoyo Games pour accéder au contenu du Marketplace.
+- La version **Creator** à 39€ par an vous permet d'exporter votre jeu soit pour Windows soit pour Mac OS selon la version que vous avez choisie.
+  - Vous ne pouvez pas supprimer l'écran splash par défaut.
+  - Vous ne pouvez exporter votre jeu qu'avec la machine virtuelle.
+  - Cette licence moins cher ne dure toutefois qu'un an.
+- La version **Desktop** à 99€ vous permet d'exporter votre jeu pour Windows, Mac OS, et Ubuntu.
+  - Vous pouvez exporter votre jeu sur les trois plateformes en utilisant la machine virtuelle ou le compilateur natif YYC.
+  - Cette licence est permanente.
+- La version **Web** à 149€ vous permet d'exporter votre jeu pour HTML5.
+  - Votre jeu est exporté en JavaScript.
+  - Cette licence est permanente.
+- La version **UWP** à 199€ vous permet d'exporter votre jeu pour la plateforme Microsoft Universal Windows Platform ainsi que le programme Xbox One Creators.
+  - Vous pouvez exporter votre jeu en utilisant la machine virtuelle ou le compilateur natif YYC.
+  - Cette licence est permanente.
+- La version **Mobile** à 199€ vous permet d'exporter votre jeu pour Android, Fire et iOS.
+  - Vous pouvez exporter votre jeu sur les trois plateformes en utilisant la machine virtuelle ou le compilateur natif YYC.
+  - Cette licence est permanente.
+- La version **PS4** à 799€ par an vous permet d'exporter votre jeu pour la console PS4.
+  - Vous devez un posséder un compte de développeur Sony.
+  - Cette licence ne dure qu'un an.
+- La version **Xbox One** à 799€ par an vous permet d'exporter votre jeu pour la console Xbox One.
+  - Vous devez un posséder un compte de développeur Microsoft.
+  - Cette licence ne dure qu'un an.
+- La version **Switch** à 799€ par an vous permet d'exporter votre jeu pour la console Switch.
+  - Vous devez un posséder un compte de développeur Nintendo.
+  - Cette licence ne dure qu'un an.
+- La version **Ultimate** à 1500€ par an vous permet d'exporter votre jeu pour toutes les consoles précédentes.
+  - Vous pouvez exporter sur toutes les plateformes possibles.
+  - Vous devez un posséder un compte de développeur Sony, Microsoft et Nintendo.
+  - Cette licence ne dure qu'un an.
+
 ## Concepts de base
 
 Dans GameMaker Studio 2, un jeu est essentiellement constitué de ressources appelées *rooms*. Ce sont les écrans ou niveaux de votre jeu. Chaque room comporte à son tour des *instances* de ressources appelées *objects*. Les objects définissent les interactions possibles dans votre jeu et les instances en sont des exemplaires indépendants interagissant dans une room.
@@ -50,6 +89,8 @@ Paramétrez la fréquence de rafraichissement de l'écran de votre jeu (`60` par
 ###  Compiler et exécuter le jeu
 
 Cliquez sur le bouton`Run`, cliquez sur le menu `Build -> Run` ou  appuyez sur la touche `F5`.
+
+**Conseil :** Testez votre jeu régulièrement.
 
 ### Définir la résolution du jeu
 
@@ -692,22 +733,47 @@ Les propriétés `image_xscale` et `image_yscale` définissent le taux d'agrandi
 
 #### Propriétés prédéfines des sprites
 
-- `image_alpha` : correspond à l'opacité du Sprite (entre 0 et 1). Lecture et écriture.
-- `image_blend` : correspond à la teinte à appliquer au Sprite sous la forme d'une couleur (par défaut `c_white`). Lecture et écriture.
-- `image_index` : correspond à l'indice de l'image à afficher par le Sprite. Lecture et écriture.
-- `sprite_index` : correspond à l'index du Sprite définit dans l'arborescence `Resources`. Lecture et écriture.
-- `x_scale` : correspond à l'échelle horizontale du Sprite (par défaut 1). Lecture et écriture.
-- `y_scale` : correspond à l'échelle verticale du Sprite (par défaut 1). Lecture et écriture.
-- `image_speed` : correspond à la vitesse de lecture des images composant le Sprite. Lecture et écriture.
-- `image_width` : correspond à la largeur du Sprite. Lecture et écriture.
-- `image_height` : correspond à la hauteur du Sprite. Lecture et écriture.
+- `image_alpha` : correspond à l'opacité du sprite (entre 0 et 1). Lecture et écriture.
+- `image_blend` : correspond à la teinte à appliquer au sprite sous la forme d'une couleur (par défaut `c_white`). Lecture et écriture.
+- `image_index` : correspond à l'indice de l'image à afficher par le sprite. Lecture et écriture.
+- `sprite_index` : correspond à l'index du sprite définit dans le dossier `Sprites` du panneau `Resources`. Lecture et écriture.
+- `x_scale` : correspond à l'échelle horizontale du sprite (par défaut 1). Lecture et écriture.
+- `y_scale` : correspond à l'échelle verticale du sprite (par défaut 1). Lecture et écriture.
+- `image_speed` : correspond à la vitesse de lecture des images composant le sprite. Lecture et écriture.
+- `image_width` : correspond à la largeur du sprite. Lecture et écriture.
+- `image_height` : correspond à la hauteur du sprite. Lecture et écriture.
 - `image_number` : correspond au nombre d'images totales du sprite. Lecture et écriture.
-- `sprite_xoffset` : correspond au décalage horizontal de l'origine du Sprite par rapport au bord gauche.
-- `sprite_yoffset` : correspond au décalage vertical de l'origine du Sprite par rapport au bord supérieur.
-- `bbox_left` : correspond à la position horizontale du côté gauche de la boite de collision du Sprite.
-- `bbox_right` : correspond à la position horizontale du côté droit de la boite de collision du Sprite.
-- `bbox_top` : correspond à la position verticale du côté supérieur de la boite de collision du Sprite.
-- `bbox_bottom` : correspond à la position verticale du côté inférieur de la boite de collision du Sprite.
+- `sprite_xoffset` : correspond au décalage horizontal de l'origine du sprite par rapport au bord gauche.
+- `sprite_yoffset` : correspond au décalage vertical de l'origine du sprite par rapport au bord supérieur.
+- `bbox_left` : correspond à la position horizontale du côté gauche de la boite de collision du sprite par rapport à son origine.
+- `bbox_right` : correspond à la position horizontale du côté droit de la boite de collision du sprite par rapport à son origine.
+- `bbox_top` : correspond à la position verticale du côté supérieur de la boite de collision du sprite par rapport à son origine.
+- `bbox_bottom` : correspond à la position verticale du côté inférieur de la boite de collision du sprite par rapport à son origine.
+
+### Shaders
+
+```js
+shader_set(nom_du_shader);
+draw_self();
+shader_reset();
+```
+
+Un shader est un programme qui s'exécute sur la carte graphique. GameMaker Studio 2 utilise le langage *GLSL* pour programmer ses shaders.
+
+Il existe deux sortes de shaders.
+
+- Les vertex shaders servent à manipuler la géométrie des images.
+- Les fragment shaders servent à manipuler les pixels constituants une image.
+
+
+
+```js
+void main() {
+    // instructions
+}
+```
+
+[A SUIVRE...]
 
 ### Effets de particules
 
@@ -1265,7 +1331,7 @@ La fonction `draw_healthbar` affiche une barre de vie. Elle doit être utilisée
 - Le quatrième paramètre correspond à la position basse du rectangle de la barre de vie.
 - Le cinquième paramètre correspond à la quantité de vie (de 0 à 100).
 - Le sixième paramètre correspond à la couleur arrière.
-- Le spetième paramètre correspond à la couleur de la valeur minimale.
+- Le septième paramètre correspond à la couleur de la valeur minimale.
 - Le huitième paramètre correspond à la couleur de la valeur maximale.
 - Le neuvième paramètre correspond à la direction d'ancrage de la barre de vie.
   - `0` indique que la barre de vie est alignée à gauche.
@@ -1920,6 +1986,53 @@ Vous pouvez modifier ses dimensions avec la fonction `display_set_gui_size` en p
 **Conseil :** Veillez à ce que le calque GUI ait toujours les même proportions que votre surface d'application.
 
 **Remarque :** Vous pouvez définir les dimensions de ce calque avec une résolution HD même si votre jeu est en pixel art.
+
+### Ecran splitté
+
+Dans un évènement `Create`.
+
+```js
+// définit les dimensions du jeu
+var largeur_jeu = 640;
+var hauteur_jeu = 360;
+
+// active les viewports
+view_enabled = true;
+
+// paramètre la première vue (joueur 1)
+// rend la vue visible
+view_visible[0] = true;
+// définit le coin supérieur gauche de la vue
+view_xport[0] = 0;
+view_yport[0] = 0;
+// définit la taille de la vue
+view_wport[0] = largeur_jeu / 2;
+view_hport[0] = hauteur_jeu;
+// crée une caméra
+view_camera[0] = camera_create_view(0, 0, largeur_jeu / 2, hauteur_jeu, 0, object_joueur_1, -1, -1, largeur_jeu, hauteur_jeu);
+
+// paramètre la seconde vue (joueur 2)
+// rend la vue visible
+view_visible[1] = true;
+// définit le coin supérieur gauche de la vue
+view_xport[1] = largeur_jeu / 2;
+view_yport[1] = 0;
+// définit la taille de la vue
+view_wport[1] = largeur_jeu / 2;
+view_hport[1] = hauteur_jeu;
+// crée une caméra
+view_camera[1] = camera_create_view(0, 0, largeur_jeu / 2, hauteur_jeu, 0, object_joueur_2, -1, -1, largeur_jeu, hauteur_jeu);
+
+// récupère les dimension de l'écran physique
+var largeur_ecran = display_get_width();
+var hauteur_ecran = display_get_height();
+// place la fenêtre au centre de l'écran
+window_set_rectangle((largeur_ecran - largeur_jeu) / 2), (hauteur_ecran - hauteur_jeu) / 2), largeur_jeu, hauteur_jeu);
+// redéfinit la taille de la fenêtre
+surface_resize(application_surface, largeur_jeu, hauteur_jeu);
+```
+
+
 
 ### Bitmap fonts
 
