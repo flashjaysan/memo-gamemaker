@@ -777,6 +777,10 @@ void main() {
 
 ### Effets de particules
 
+#### Effets prédéfinis
+
+GameMaker Studio propose un ensemble de système de particules simple à mettre en oeuvre.
+
 Crée un effet en dessous d'une instance :
 
 ```js
@@ -820,6 +824,301 @@ if (mouse_check_button_pressed(mb_left)) {
 // affiche une pluie en continue en haut de l'écran à une position horizontale entre 0 et 600
 var totally_random = irandom_range(0, 600);
 effect_create_above(ef_rain, totally_random, 0, 0, c_blue);
+```
+
+#### Système de particules personnalisé
+
+##### Système de particule
+
+Créez un système de particules :
+
+```js
+systeme_de_particules = part_system_create();
+```
+
+##### Création et configuration d'une particule
+
+###### Type de particule
+
+Créez un type de particule :
+
+```js
+type_particule = part_type_create();
+```
+
+###### Forme prédéfinie
+
+Vous pouvez utiliser des formes prédéfinies :
+
+```js
+part_type_shape(type_particule, forme);
+```
+
+Le paramètre `forme` peut prendre les valeurs suivantes :
+
+- `pt_shape_pixel` : un pixel 1x1. Par défaut.
+- `pt_shape_disk` : Un cercle plein.
+- `pt_shape_square` : Un carré plein.
+- `pt_shape_line` : Une ligne horizontale de 8 pixels de large.
+- `pt_shape_star` : Une étoile pleine à cinq branches.
+- `pt_shape_circle` : Un contour de cercle de 3 pixels.
+- `pt_shape_ring` : Un cercle avec un reflet intérieur (comme une bulle).
+- `pt_shape_sphere` : Un cercle avec un reflet extérieur.
+- `pt_shape_flare` : Une étincelle avec un halo.
+- `pt_shape_spark` : Une étincelle.
+- `pt_shape_explosion` : Une explosion.
+- `pt_shape_cloud` : Un nuage.
+- `pt_shape_smoke` : Une fumée.
+- `pt_shape_snow` : Un flocon de neige.
+
+![Les différentes formes](C:\Users\user\Documents\Travaux\Mémos\gms2_particles_shapes.png)
+
+###### Sprite personnalisé
+
+Ou vous pouvez utiliser un sprite personnalisé :
+
+```js
+part_type_sprite(type_particule, sprite, animer, etirer, sous_image_aleatoire);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- sprite : Le nom du sprite à utiliser pour cette particule.
+- animer : Un booléen pour indiquer si la particule doit utiliser l'animation du sprite (true) ou non (false).
+- etirer : Un booléen pour indiquer si la particule aligne l'animation du sprite sur la durée de vie de la particule (true) ou non (false).
+- sous_image_aleatoire : Un booléen pour indiquer si la particule choisit une image de l'animation du sprite au hasard (true) ou non (false). Le paramètre animer doit être false.
+
+###### Durée de vie
+
+Définissez la durée de vie (en steps) de la particule :
+
+```js
+part_type_life(type_particule, duree_minimale, duree_maximale);
+```
+
+La durée de vie sera définie aléatoirement entre les deux valeurs. Pour définir une durée de vie constante, donnez aux deux paramètres la même valeur.
+
+Définissez l'échelle horizontale et / ou verticale de la particule :
+
+```js
+part_type_scale(type_particule, echelle_x, echelle_y);
+```
+
+###### Taille
+
+Définissez la taille de la particule :
+
+```js
+part_type_size(type_particule, taille_debut_min, taille_debut_max, variation, variation_aleatoire);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- taille_debut_min : Un nombre (positif) indiquant la taille minimale possible de la particule à sa création. 1 par défaut.
+- taille_debut_max : Un nombre (positif) indiquant la taille maximale possible de la particule à sa création. 1 par défaut.
+- variation : Un nombre indiquant la valeur à ajouter à la taille chaque step (peut être une valeur négative).
+- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à la taille chaque step.
+
+Pour définir une taille initiale constante, donnez la même valeur aux paramètres angle_debut_min et angle_debut_max.
+
+###### Orientation
+
+Définissez l'orientation de l'image de la particule :
+
+```js
+part_type_orientation(type_particule, angle_debut_min, angle_debut_max, variation, variation_aleatoire, aligner_sur_trajectoire);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- angle_debut_min : Un nombre indiquant l'angle (en degrés) minimum possible de la particule à sa création. 0 par défaut.
+- angle_debut_max : Un nombre indiquant l'angle (en degrès) maximum possible de la particule à sa création. 0 par défaut.
+- variation : Un nombre indiquant la valeur à ajouter à l'angle chaque step (peut être une valeur négative).
+- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à l'angle chaque step.
+- aligner_sur_trajectoire : Un booléen indiquant si la particule doit orienter automatiquement son angle sur sa trajectoire (true) ou non (false).
+
+Pour définir une orientation initiale constante, donnez la même valeur aux paramètres angle_debut_min et angle_debut_max.
+
+###### Couleur
+
+Définissez la couleur de la particule :
+
+```js
+part_type_color1(type_particule, couleur);
+part_type_color2(type_particule, couleur_debut, couleur_fin);
+part_type_color3(type_particule, couleur_debut, couleur_milieu, couleur_fin);
+```
+
+Les différentes versions vous permettent de définir la couleur de la particule durant sa durée de vie.
+
+###### Mélange
+
+Définissez le mélange de la particule avec les autres :
+
+```js
+part_type_blend(type_particule, melange);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- melange : Un booléen indiquant si la particule se mélange ou non avec les autres.
+
+###### Direction
+
+Définissez la direction de la particule :
+
+```js
+part_type_direction(type_particule, angle_debut_minimum, angle_debut_maximum, variation, variation_aleatoire);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- angle_debut_min : Un nombre indiquant l'angle (de 0 à 359 degrés) minimum possible de la particule à sa création. 0 par défaut.
+- angle_debut_max : Un nombre indiquant l'angle (de 0 à 359 degrès) maximum possible de la particule à sa création. 0 par défaut.
+- variation : Un nombre indiquant la valeur à ajouter à l'angle chaque step (peut être une valeur négative).
+- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à l'angle chaque step.
+
+Pour définir une direction initiale constante, donnez la même valeur aux paramètres angle_debut_min et angle_debut_max.
+
+###### Vitesse
+
+Définissez la vitesse de la particule :
+
+```js
+part_type_speed(type_particule, vitesse_debut_minimum, vitesse_debut_maximum, variation, variation_aleatoire);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- vitesse_debut_min : Un nombre indiquant la vitesse minimale possible de la particule à sa création. 0 par défaut.
+- vitesse_debut_max : Un nombre indiquant la vitesse maximale possible de la particule à sa création. 0 par défaut.
+- variation : Un nombre indiquant la valeur à ajouter à la vitesse chaque step (peut être une valeur négative).
+- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à la vitesse chaque step.
+
+Pour définir une vitesse initiale constante, donnez la même valeur aux paramètres vitesse_debut_min et vitesse_debut_max.
+
+###### Force de gravité
+
+Définissez la force de gravité appliquée sur la particule :
+
+```js
+part_type_gravity(type_particule, force, direction);
+```
+
+Les paramètres sont les suivants :
+
+- type_particule : La particule à paramétrer.
+- force : Un nombre indiquant l'amplitude de la force de gravité à appliquer sur la particule.
+- direction : Un nombre (entre 0 et 359 degrés) indiquant la direction de la force de gravité à appliquer sur la particule. 270 par défaut.
+
+###### Opacité
+
+Définissez l'opacité de la particule :
+
+```js
+part_type_alpha1(type_particule, opacite);
+part_type_alpha2(type_particule, opacite_debut, opacite_fin);
+part_type_alpha3(type_particule, opacite_debut, opacite_milieu, opacite_fin);
+```
+
+Les différentes versions vous permettent de définir l'opacité de la particule durant sa durée de vie.
+
+##### Génération de particules
+
+Après avoir créé un système de particule, créé et  paramétré une particule, vous pouvez générer un effet de particules. Il y a deux méthodes.
+
+###### Génération sur un point
+
+Cette méthode vous permet de générer des particules sur un point précis :
+
+```js
+part_particles_create(systeme_de_particules, position_x, position_y, type_particule, quantite);
+```
+
+Les paramètres sont les suivants :
+
+- systeme_de_particules : Le système de paticules à utiliser pour la génération.
+- position_x : La position horizontale du point de génération.
+- position_y : La position verticale du point de génération.
+- type_particule : Le type de particule à générer.
+- quantite : Le nombre de particules à générer.
+
+###### Génération dans une région
+
+Cette méthode vous permet de contrôler finement la génération de particules via l'utilisation d'un émetteur.
+
+Commencez par créer un émetteur :
+
+```js
+var emetteur = part_emitter_create(systeme_de_particules);
+```
+
+Définissez ensuite la région où les particules seront générées. La région est définie par deux points formant un rectangle :
+
+```js
+part_emitter_region(systeme_de_particules, emetteur, point_1_position_x, point_1_position_y, point_2_position_x, point_2_position_y, forme, repartition);
+```
+
+Les paramètres sont les suivants :
+
+- systeme_de_particules : Le système de paticules à utiliser pour la génération.
+- emetteur : L'émetteur à utiliser pour la génération.
+- point_1_position_x : La position horizontale du premier point de la région.
+- point_1_position_y : La position verticale du premier point de la région.
+- point_2_position_x : La position horizontale du second point de la région.
+- point_2_position_y : La position verticale du second point de la région.
+- forme : La forme de la région où aura lieue la génération.
+  - ps_shape_rectangle : Une forme rectangulaire.
+  - ps_shape_ellipse : Une forme elliptique.
+  - ps_shape_diamond : Une forme de losange.
+  - ps_shape_line : Une ligne droite.
+- repartition : Le type de répartition des particules générées dans la région.
+  - ps_distr_linear : Une distribution linéaire où les particules sont réparties .
+  - ps_distr_gaussian : Une distribution gaussienne où les particules ont plus de chances d'être générées au centre de la région.
+  - ps_distr_invgaussian : Une distribution gaussienne inversée où les particules ont plus de chances d'être générées sur les bords de la région.
+
+Vous pouvez ensuite générer des particules de deux manières dans la région définie.
+
+La première manière vous permet de générer toutes les particules au même instant comme dans une explosion :
+
+```js
+part_emitter_burst(systeme_de_particules, emetteur, type_particule, quantite);
+```
+
+Les paramètres sont les suivants :
+
+- systeme_de_particules : Le système de paticules à utiliser pour la génération.
+- emetteur : L'émetteur à utiliser pour la génération.
+- type_particule : Le type de particule à générer.
+- quantite : Le nombre de particules à générer.
+
+La seconde manière vous permet de générer les particules en continu :
+
+```js
+part_emitter_stream(systeme_de_particules, emetteur, type_particule, quantite);
+```
+
+Les paramètres sont les suivants :
+
+- systeme_de_particules : Le système de paticules à utiliser pour la génération.
+- emetteur : L'émetteur à utiliser pour la génération.
+- type_particule : Le type de particule à générer.
+- quantite : Le nombre de particules à générer.
+
+##### Cleanup
+
+Une fois que vous avez terminé l'utilisation des particules, vous devez libérer la mémoire.
+
+```js
+part_emitter_destroy();
+part_type_destroy();
+part_system_destroy();
 ```
 
 ### Exemple de code pour retourner un personnage avec les flèches du clavier
@@ -1199,6 +1498,10 @@ if (room_exists(room_previous(room)))
 
 La fonction `audio_play_sound` vous permet de lancer la lecture d'un son ou d'une musique.  Elle renvoie un entier correspondant à un indice associé au son lu.
 
+```js
+audio_play_sound(nom_de_son, priorite, lecture_en_boucle);
+```
+
 - Le premier paramètre est le nom du son ou de la musique à jouer.
 - Le deuxième paramètre est un entier indiquant la priorité du son.
 - Le dernier paramètre est un booléen indiquant si le son ou la musique doit jouer en boucle ou non.
@@ -1220,7 +1523,7 @@ La fonction `audio_sound_gain` vous permet de faire une interpolation sur le gai
 - Le dernier paramètre indique la durée de l'interpolation en millisecondes.
 
 ```js
-audio_sound_gain(indice_de_son, gain_cible, durée);
+audio_sound_gain(indice_de_son, gain_cible, duree);
 ```
 
 **Remarque :** Pour changer le gain instantannément, donnez une durée de 0.
@@ -1248,18 +1551,26 @@ draw_set_colour(couleur);
 La fonction `make_colour_rgb` renvoie un entier correspondant à une couleur. Elle prend trois arguments correspondant aux composantes rouge, verte et bleue (une valeur comprise entre 0 et 255) d'une couleur.
 
 ```js
-var color = make_colour_rgb(rouge, vert, bleu);
+var couleur = make_colour_rgb(rouge, vert, bleu);
 ```
 
 **Remarque :** Il existe également la fonction `make_colour_hsv` qui fonctionne de la même manière que la fonction précédente mais dont les arguments correspondent à la teinte, la saturation et la luminosité d'une couleur.
 
 ```js
-var colour = make_colour_hsv(teinte, saturation, luminosite);
+var couleur = make_colour_hsv(teinte, saturation, luminosite);
 ```
+
+Vous pouvez également utiliser la notation hexadécimale pour représenter une couleur en faisant précéder la valeur du signe `$`.
+
+```js
+var couleur = $FFFFFF.
+```
+
+**Attention !** Contrairement aux notations habituelles, cette notation est inversée. D'abord bleu, puis vert et enfin rouge.
 
 ##### Couleurs prédéfinies
 
-GameMaker Studio 2 propose un ensemble de constantes prédéfinies pour représenter un ensemble de couleurs spécifiques.
+GameMaker Studio 2 propose un ensemble de constantes prédéfinies pour représenter des couleurs usuelles.
 
 - `c_aqua`
 - `c_black`
@@ -1282,15 +1593,12 @@ GameMaker Studio 2 propose un ensemble de constantes prédéfinies pour représe
 - `c_yellow`
 
 
-
-
 ```js
 draw_set_font(font_hud);
 draw_set_halign(fa_center);
 draw_set_colour(c_black);
 draw_text(250, 280, "Highscore: " + string(global.highscore));
 ```
-
 
 #### Dessiner un sprite
 
