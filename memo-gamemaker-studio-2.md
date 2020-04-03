@@ -217,7 +217,7 @@ alarm[0] = 60;
 Lorsque 60 *frames* sont passées, l'évènement `alarm[0]` se déclenche. Définissez des instructions à exécuter dans cet évènement. Par exemple, faites apparaître un ennemi.
 
 ```js
-instance_create_layer(irandom_range(0, Room_width), irandom_range(0, Room_height), "Instances", enemi);
+instance_create_layer(irandom_range(0, Room_width), irandom_range(0, Room_height), "Instances", ennemi);
 ```
 
 **Remarque :** Après l'exécution du script associé à l'évènement, le *timer* prend la valeur `-1`.
@@ -275,8 +275,8 @@ Une variable d'instance est une variable associée à une instance d'un object. 
 - Créez une variable d'instance dans l'évènement `Create` en lui affectant une valeur. Vous pouvez ensuite y accéder ou la modifier depuis n'importe quel autre évènement de l'instance. 
 
 ```js
-start_x = 10;
-end_x = 20;
+debut_x = 10;
+fin_x = 20;
 ```
 
 #### Variables locales
@@ -286,7 +286,7 @@ Une variable locale est une variable utilisable uniquement dans un seul script. 
 - Créez une variable locale en la faisant précéder du mot clé `var`.
 
 ```js
-var length = start_x - end_x;
+var longueur = debut_x - fin_x;
 ```
 
 #### Variables globales
@@ -296,7 +296,7 @@ Une variable globale est une variable accessible depuis l'ensemble des scripts d
 - Créez une variable globale en ajoutant une sous-variable à la variable prédéfinie `global`.
 
 ```js
-global.hiscore = 100;
+global.meilleur_score = 100;
 ```
 
 #### Variables globales prédéfinies
@@ -328,37 +328,37 @@ Un booléen peut valoir `false` (faux) ou `true` (vrai).  Ces valeurs sont équi
 GameMaker Studio 2  ne fait pas de distinction entre les nombres entiers et les nombres à virgules.
 
 ```js
-var ten = 10;
-var half = 0.5;
-var ten_and_half = ten + half;
+var dix = 10;
+var demi = 0.5;
+var dix_et_demi = dix + demi;
 ```
 
 Les littéraux chaînes sont écrits entre guillemets doubles.
 
 ```js
-var hello = "bonjour";
+var salut = "Bonjour";
 ```
 
 Vous pouvez concaténer plusieurs chaînes avec l'opérateur ``.
 
 ```js
-var hello = "bonjour";
-var name = "Steve";
-var greeting = hello + ", " + name + ".";
+var salut = "Bonjour";
+var nom = "Steve";
+var message = salut + ", " + nom + ".";
 ```
 
 Vous pouvez convertir un nombre en chaîne grâce à la fonction `string`.
 
 ```js
-var number = 10.5;
-var string_number = string(number);
+var nombre = 10.5;
+var chaine_nombre = string(nombre);
 ```
 
 Vous pouvez convertir une chaîne en nombre grâce à la fonction `real`.
 
 ```js
-var text = "10";
-var ten = real(text);
+var texte = "10";
+var dix = real(texte);
 ```
 
 ### Afficher un message
@@ -636,19 +636,21 @@ var parameter_name = argument0;
 Pour créer une instance sur un calque spécifique, utilisez la fonction `instance_create_layer`. Elle vous permet de créer une nouvelle instance d'un object sur un calque particulier. Elle prend en argument la position `x` et `y`, le nom d'un calque de la room active (sous forme de chaîne) et le nom de l'object à instancier.
 
 ```js
-var identifiant_instance = instance_create_layer(x, y, "nom_de_calque", nom_object);
+var identifiant_instance = instance_create_layer(position_x, position_y, "nom_calque", nom_objet);
 ```
 Pour créer une instance sur le calque du game object contenant ce script, utilisez la variable prédéfinie `layer`.
 
 ```js
-var identifiant_instance = instance_create_layer(x, y, layer, nom_object);
+var identifiant_instance = instance_create_layer(position_x, position_y, layer, nom_objet);
 ```
 
 Pour créer une instance sur un nouveau calque (qui n'est pas accessible) à une profondeur donnée (entre -16000 (devant) et 16000 (derrière)), utilisez la fonction `instance_create_depth`.
 
 ```js
-var identifiant_instance = instance_create_depth(x, y, profondeur, nom_object);
+var identifiant_instance = instance_create_depth(position_x, position_y, profondeur, nom_objet);
 ```
+
+**Remarque :** Vous pouvez utiliser la variable prédéfine `depth` avec cette fonction.
 
 Ces fonctions renvoie un identifiant unique de l'instance créée.
 
@@ -669,7 +671,7 @@ instance_destroy(identifiant_instance);
 Enfin, elle peut également prendre le nom d'un game object. Dans ce cas, toutes les instances de ce game object sont détruites.
 
 ```js
-instance_destroy(nom_object);
+instance_destroy(nom_objet);
 ```
 
 #### Vérifier si une instance existe
@@ -692,7 +694,7 @@ Dans le panneau `Room Editor`, onglet `Instances Layer Properties` ou dans la vu
 Utilisez la fonction `place_meeting` qui prend la position à tester et le nom de l'object.
 
 ```js
-if (place_meeting(x, y, nom_object))
+if (place_meeting(position_x, position_y, nom_objet))
 {
     // instructions
 }
@@ -703,7 +705,7 @@ if (place_meeting(x, y, nom_object))
 La fonction `instance_number` vous permet de savoir combien d'instances d'un  object spécifique passé en paramètre existent dans la room.
 
 ```js
-if (instance_number(nom_object) > limite)
+if (instance_number(nom_objet) > limite)
 {
     // instructions
 }
@@ -722,7 +724,7 @@ La fonction `move_towards_point` (à placer dans un évènement `Create` par exe
 - Le dernier paramètre correspond à la vitesse à laquelle doit se déplacer l'instance.
 
 ```js
-move_towards_point(position_x, position_y, vitesse_object);
+move_towards_point(position_x, position_y, vitesse_objet);
 ```
 
 ### Sprites
@@ -753,7 +755,7 @@ Les propriétés `image_xscale` et `image_yscale` définissent le taux d'agrandi
 ### Shaders
 
 ```js
-shader_set(nom_du_shader);
+shader_set(nom_shader);
 draw_self();
 shader_reset();
 ```
@@ -883,11 +885,11 @@ part_type_sprite(type_particule, sprite, animer, etirer, sous_image_aleatoire);
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- sprite : Le nom du sprite à utiliser pour cette particule.
-- animer : Un booléen pour indiquer si la particule doit utiliser l'animation du sprite (true) ou non (false).
-- etirer : Un booléen pour indiquer si la particule aligne l'animation du sprite sur la durée de vie de la particule (true) ou non (false).
-- sous_image_aleatoire : Un booléen pour indiquer si la particule choisit une image de l'animation du sprite au hasard (true) ou non (false). Le paramètre animer doit être false.
+- `type_particule` : La particule à paramétrer.
+- `sprite` : Le nom du sprite à utiliser pour cette particule.
+- `animer` : Un booléen pour indiquer si la particule doit utiliser l'animation du sprite (true) ou non (false).
+- `etirer` : Un booléen pour indiquer si la particule aligne l'animation du sprite sur la durée de vie de la particule (true) ou non (false).
+- `sous_image_aleatoire` : Un booléen pour indiquer si la particule choisit une image de l'animation du sprite au hasard (true) ou non (false). Le paramètre animer doit être false.
 
 ###### Durée de vie
 
@@ -910,16 +912,16 @@ part_type_scale(type_particule, echelle_x, echelle_y);
 Définissez la taille de la particule :
 
 ```js
-part_type_size(type_particule, taille_debut_min, taille_debut_max, variation, variation_aleatoire);
+part_type_size(type_particule, taille_debut_min, taille_debut_max, variation_fixe, variation_aleatoire);
 ```
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- taille_debut_min : Un nombre (positif) indiquant la taille minimale possible de la particule à sa création. 1 par défaut.
-- taille_debut_max : Un nombre (positif) indiquant la taille maximale possible de la particule à sa création. 1 par défaut.
-- variation : Un nombre indiquant la valeur à ajouter à la taille chaque step (peut être une valeur négative).
-- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à la taille chaque step.
+- `type_particule` : La particule à paramétrer.
+- `taille_debut_min` : Un nombre (positif) indiquant la taille minimale possible de la particule à sa création. 1 par défaut.
+- `taille_debut_max` : Un nombre (positif) indiquant la taille maximale possible de la particule à sa création. 1 par défaut.
+- `variation_fixe` : Un nombre indiquant la valeur à ajouter à la taille chaque step (peut être une valeur négative).
+- `variation_aleatoire` : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à la taille chaque step.
 
 Pour définir une taille initiale constante, donnez la même valeur aux paramètres angle_debut_min et angle_debut_max.
 
@@ -928,17 +930,17 @@ Pour définir une taille initiale constante, donnez la même valeur aux paramèt
 Définissez l'orientation de l'image de la particule :
 
 ```js
-part_type_orientation(type_particule, angle_debut_min, angle_debut_max, variation, variation_aleatoire, aligner_sur_trajectoire);
+part_type_orientation(type_particule, angle_debut_min, angle_debut_max, variation_fixe, variation_aleatoire, aligner_sur_trajectoire);
 ```
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- angle_debut_min : Un nombre indiquant l'angle (en degrés) minimum possible de la particule à sa création. 0 par défaut.
-- angle_debut_max : Un nombre indiquant l'angle (en degrès) maximum possible de la particule à sa création. 0 par défaut.
-- variation : Un nombre indiquant la valeur à ajouter à l'angle chaque step (peut être une valeur négative).
-- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à l'angle chaque step.
-- aligner_sur_trajectoire : Un booléen indiquant si la particule doit orienter automatiquement son angle sur sa trajectoire (true) ou non (false).
+- `type_particule` : La particule à paramétrer.
+- `angle_debut_min` : Un nombre indiquant l'angle (en degrés) minimum possible de la particule à sa création. 0 par défaut.
+- `angle_debut_max` : Un nombre indiquant l'angle (en degrès) maximum possible de la particule à sa création. 0 par défaut.
+- `variation_fixe` : Un nombre indiquant la valeur à ajouter à l'angle chaque step (peut être une valeur négative).
+- `variation_aleatoire` : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à l'angle chaque step.
+- `aligner_sur_trajectoire` : Un booléen indiquant si la particule doit orienter automatiquement son angle sur sa trajectoire (true) ou non (false).
 
 Pour définir une orientation initiale constante, donnez la même valeur aux paramètres angle_debut_min et angle_debut_max.
 
@@ -964,24 +966,24 @@ part_type_blend(type_particule, melange);
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- melange : Un booléen indiquant si la particule se mélange ou non avec les autres.
+- `type_particule` : La particule à paramétrer.
+- `melange` : Un booléen indiquant si la particule se mélange ou non avec les autres.
 
 ###### Direction
 
 Définissez la direction de la particule :
 
 ```js
-part_type_direction(type_particule, angle_debut_minimum, angle_debut_maximum, variation, variation_aleatoire);
+part_type_direction(type_particule, angle_debut_minimum, angle_debut_maximum, variation_fixe, variation_aleatoire);
 ```
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- angle_debut_min : Un nombre indiquant l'angle (de 0 à 359 degrés) minimum possible de la particule à sa création. 0 par défaut.
-- angle_debut_max : Un nombre indiquant l'angle (de 0 à 359 degrès) maximum possible de la particule à sa création. 0 par défaut.
-- variation : Un nombre indiquant la valeur à ajouter à l'angle chaque step (peut être une valeur négative).
-- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à l'angle chaque step.
+- `type_particule` : La particule à paramétrer.
+- `angle_debut_min` : Un nombre indiquant l'angle (de 0 à 359 degrés) minimum possible de la particule à sa création. 0 par défaut.
+- `angle_debut_max` : Un nombre indiquant l'angle (de 0 à 359 degrès) maximum possible de la particule à sa création. 0 par défaut.
+- `variation_fixe` : Un nombre indiquant la valeur à ajouter à l'angle chaque step (peut être une valeur négative).
+- `variation_aleatoire` : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à l'angle chaque step.
 
 Pour définir une direction initiale constante, donnez la même valeur aux paramètres angle_debut_min et angle_debut_max.
 
@@ -990,16 +992,16 @@ Pour définir une direction initiale constante, donnez la même valeur aux param
 Définissez la vitesse de la particule :
 
 ```js
-part_type_speed(type_particule, vitesse_debut_minimum, vitesse_debut_maximum, variation, variation_aleatoire);
+part_type_speed(type_particule, vitesse_debut_minimum, vitesse_debut_maximum, variation_fixe, variation_aleatoire);
 ```
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- vitesse_debut_min : Un nombre indiquant la vitesse minimale possible de la particule à sa création. 0 par défaut.
-- vitesse_debut_max : Un nombre indiquant la vitesse maximale possible de la particule à sa création. 0 par défaut.
-- variation : Un nombre indiquant la valeur à ajouter à la vitesse chaque step (peut être une valeur négative).
-- variation_aleatoire : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à la vitesse chaque step.
+- `type_particule` : La particule à paramétrer.
+- `vitesse_debut_min` : Un nombre indiquant la vitesse minimale possible de la particule à sa création. 0 par défaut.
+- `vitesse_debut_max` : Un nombre indiquant la vitesse maximale possible de la particule à sa création. 0 par défaut.
+- `variation_fixe` : Un nombre indiquant la valeur à ajouter à la vitesse chaque step (peut être une valeur négative).
+- `variation_aleatoire` : Un nombre (compris entre -20 et 20) indiquant la valeur aléatoire à ajouter à la vitesse chaque step.
 
 Pour définir une vitesse initiale constante, donnez la même valeur aux paramètres vitesse_debut_min et vitesse_debut_max.
 
@@ -1013,9 +1015,9 @@ part_type_gravity(type_particule, force, direction);
 
 Les paramètres sont les suivants :
 
-- type_particule : La particule à paramétrer.
-- force : Un nombre indiquant l'amplitude de la force de gravité à appliquer sur la particule.
-- direction : Un nombre (entre 0 et 359 degrés) indiquant la direction de la force de gravité à appliquer sur la particule. 270 par défaut.
+- `type_particule` : La particule à paramétrer.
+- `force` : Un nombre indiquant l'amplitude de la force de gravité à appliquer sur la particule.
+- `direction` : Un nombre (entre 0 et 359 degrés) indiquant la direction de la force de gravité à appliquer sur la particule. 270 par défaut.
 
 ###### Opacité
 
@@ -1043,11 +1045,11 @@ part_particles_create(systeme_de_particules, position_x, position_y, type_partic
 
 Les paramètres sont les suivants :
 
-- systeme_de_particules : Le système de paticules à utiliser pour la génération.
-- position_x : La position horizontale du point de génération.
-- position_y : La position verticale du point de génération.
-- type_particule : Le type de particule à générer.
-- quantite : Le nombre de particules à générer.
+- `systeme_de_particules` : Le système de paticules à utiliser pour la génération.
+- `position_x` : La position horizontale du point de génération.
+- `position_y` : La position verticale du point de génération.
+- `type_particule` : Le type de particule à générer.
+- `quantite` : Le nombre de particules à générer.
 
 ###### Génération dans une région
 
@@ -1062,26 +1064,26 @@ var emetteur = part_emitter_create(systeme_de_particules);
 Définissez ensuite la région où les particules seront générées. La région est définie par deux points formant un rectangle :
 
 ```js
-part_emitter_region(systeme_de_particules, emetteur, point_1_position_x, point_1_position_y, point_2_position_x, point_2_position_y, forme, repartition);
+part_emitter_region(systeme_de_particules, emetteur, point_1_position_x, point_1_position_y, point_2_position_x, point_2_position_y, forme, distribution);
 ```
 
 Les paramètres sont les suivants :
 
-- systeme_de_particules : Le système de paticules à utiliser pour la génération.
-- emetteur : L'émetteur à utiliser pour la génération.
-- point_1_position_x : La position horizontale du premier point de la région.
-- point_1_position_y : La position verticale du premier point de la région.
-- point_2_position_x : La position horizontale du second point de la région.
-- point_2_position_y : La position verticale du second point de la région.
-- forme : La forme de la région où aura lieue la génération.
-  - ps_shape_rectangle : Une forme rectangulaire.
-  - ps_shape_ellipse : Une forme elliptique.
-  - ps_shape_diamond : Une forme de losange.
-  - ps_shape_line : Une ligne droite.
-- repartition : Le type de répartition des particules générées dans la région.
-  - ps_distr_linear : Une distribution linéaire où les particules sont réparties .
-  - ps_distr_gaussian : Une distribution gaussienne où les particules ont plus de chances d'être générées au centre de la région.
-  - ps_distr_invgaussian : Une distribution gaussienne inversée où les particules ont plus de chances d'être générées sur les bords de la région.
+- `systeme_de_particules` : Le système de paticules à utiliser pour la génération.
+- `emetteur` : L'émetteur à utiliser pour la génération.
+- `point_1_position_x` : La position horizontale du premier point de la région.
+- `point_1_position_y` : La position verticale du premier point de la région.
+- `point_2_position_x` : La position horizontale du second point de la région.
+- `point_2_position_y` : La position verticale du second point de la région.
+- `forme` : La forme de la région où aura lieue la génération.
+  - `ps_shape_rectangle` : Une forme rectangulaire.
+  - `ps_shape_ellipse` : Une forme elliptique.
+  - `ps_shape_diamond` : Une forme de losange.
+  - `ps_shape_line` : Une ligne droite.
+- `distribution` : Le type de distribution des particules générées dans la région.
+  - `ps_distr_linear` : Une distribution linéaire où les particules sont réparties .
+  - `ps_distr_gaussian` : Une distribution gaussienne où les particules ont plus de chances d'être générées au centre de la région.
+  - `ps_distr_invgaussian` : Une distribution gaussienne inversée où les particules ont plus de chances d'être générées sur les bords de la région.
 
 Vous pouvez ensuite générer des particules de deux manières dans la région définie.
 
@@ -1093,10 +1095,10 @@ part_emitter_burst(systeme_de_particules, emetteur, type_particule, quantite);
 
 Les paramètres sont les suivants :
 
-- systeme_de_particules : Le système de paticules à utiliser pour la génération.
-- emetteur : L'émetteur à utiliser pour la génération.
-- type_particule : Le type de particule à générer.
-- quantite : Le nombre de particules à générer.
+- `systeme_de_particules` : Le système de paticules à utiliser pour la génération.
+- `emetteur` : L'émetteur à utiliser pour la génération.
+- `type_particule` : Le type de particule à générer.
+- `quantite` : Le nombre de particules à générer.
 
 La seconde manière vous permet de générer les particules en continu :
 
@@ -1106,10 +1108,10 @@ part_emitter_stream(systeme_de_particules, emetteur, type_particule, quantite);
 
 Les paramètres sont les suivants :
 
-- systeme_de_particules : Le système de paticules à utiliser pour la génération.
-- emetteur : L'émetteur à utiliser pour la génération.
-- type_particule : Le type de particule à générer.
-- quantite : Le nombre de particules à générer.
+- `systeme_de_particules` : Le système de paticules à utiliser pour la génération.
+- `emetteur` : L'émetteur à utiliser pour la génération.
+- `type_particule` : Le type de particule à générer.
+- `quantite` : Le nombre de particules à générer.
 
 ##### Cleanup
 
@@ -1244,7 +1246,7 @@ Les fonctions précédents prennent en argument une des constantes prédéfinies
 - `vk_alt` correspond à la touche `Alt` du clavier.
 - `vk_backspace` correspond à la touche `Del` du clavier.
 - `vk_tab` correspond à la touche `Tab` du clavier.
-- `vk_home` ??????????????????.
+- `vk_home` correspond à la touche `Home` du clavier.
 - `vk_end` correspond à la touche `Fin` du clavier.
 - `vk_delete` correspond à la touche `Suppr` du clavier.
 - `vk_insert` correspond à la touche `Inser` du clavier.
@@ -2340,9 +2342,9 @@ window_set_rectangle((largeur_ecran - largeur_jeu) / 2), (hauteur_ecran - hauteu
 surface_resize(application_surface, largeur_jeu, hauteur_jeu);
 ```
 
-
-
 ### Bitmap fonts
+
+Les bitmap fonts vous permettent de convertir un sprite animé (constitué de plusieurs images) en caractères d'une police personnalisée.
 
 Commencez par importer votre bitmap font.
 
