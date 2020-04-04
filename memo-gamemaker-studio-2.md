@@ -1443,63 +1443,184 @@ keyboard_set_map(ord("W"), vk_up);
 
 Documentation *GameMaker* sur les gamepads : `Scripting -> GML Reference -> Controls -> Gamepad Input`.
 
-GameMaker ne fournit pas d'évènement dédié aux gamepads. Vous devez donc gérer manuellement les contrôles dans un évènement `Step`.
+GameMaker ne fournit pas d'évènement dédié aux gamepads. Vous devez donc gérer manuellement les contrôles dans un évènement `Step`. Vous pouvez gérer jusqu'à quatre gamepads XInput (manettes Xbox 360 et compatibles) et jusqu'à huit gamepads DirectInput (autres modèles).
 
-La fonction `gamepad_is_connected` renvoie un booléen indiquant si un gamepad est connecté au moment de l'appel. Vous devez lui passer en paramètre l'indice (commençant à 0) d'un gamepad. C'est la première fonction à appeler avant de gérer les contrôles d'un gamepad.
+##### Vérifier si la plateforme cible prend en charge les gamepads
+
+Certaines plateformes cibles peuvent ne pas prendre en charge les gamepads. Pour le déterminez, utilisez la fonction `gamepad_is_supported`. Elle renvoie un booléen indiquant si les gamepads sont pris en charge. 
 
 ```js
-if (gamepad_is_connected(indice_de_gamepad))
+if (gamepad_is_supported()) {
+    // instructions
+}
+```
+
+##### Vérifier si un gamepad est connecté
+
+La fonction `gamepad_is_connected` renvoie un booléen indiquant si un gamepad est connecté au moment de l'appel. Vous devez lui passer en paramètre l'indice (commençant à 0) d'un gamepad. Appelez cette fonction avant de gérer les contrôles d'un gamepad.
+
+```js
+if (gamepad_is_connected(indice_gamepad))
 {
     // instructions
 }
 ```
 
-La fonction `gamepad_axis_value` renvoie la valeur d'un axe de stick d'un gamepad. Le premier paramètre correspond à l'indice du gamepad. Le second paramètre correspond à quatre constantes prédéfinies associées à une direction d'un des deux sticks possibles (`gp_axislh` pour stick gauche direction horizontale, `gp_axislv` pour stick gauche direction verticale, `gp_axisrh` pour stick droit direction horizontale et `gp_axisrv` pour stick droit direction verticale).
+L'`indice_de_gamepad` commence à `0`. Les indices de `0` à `3` sont dédiés aux gamepads XInput. Les indices de `4` à `11` sont dédiés aux gamepads DirectInput.
+
+###### Obtenir le nombre de gamepads connectés
+
+Selon la plateforme, la fonction `gamepad_get_device_count` renvoie soit le nombre de gamepads connectés, soit le nombre de gamepads que l'on peut connecté à l'appareil. C'est pourquoi il est conseillé d'utiliser cette fonction en conjonction avec la fonction `gamepad_is_connected`. Elle ne prend pas de paramètre.
 
 ```js
-if (gamepad_is_connected(indice_de_gamepad))
-{
-    var leftStickH = gamepad_axis_value(indice_de_gamepad, gp_axislh);
-    var leftStickR = gamepad_axis_value(indice_de_gamepad, gp_axislv);
-    var rightStickH = gamepad_axis_value(indice_de_gamepad, gp_axisrh);
-    var rightStickR = gamepad_axis_value(indice_de_gamepad, gp_axisrv);
+var nombre_gamepads = gamepad_get_device_count();
+for (var i = 0; i < nombre_gamepads; i++) {
+    global.gamepad[i] = gamepad_is_connected(i);
 }
 ```
+
+###### Obtenir l'intitulé du gamepad
+
+Chaque gamepad possède une chaîne de caractères décrivant son modèle. Vous pouvez accéder à cette information en utilisant la fonction `gamepad_get_description`. Elle prend en paramètre l'indice du gamepad à accéder.
+
+```js
+var modele_gamepad = gamepad_get_description(indice_gamepad);
+```
+
+###### Obtenir le GUID du gamepad
+
+Chaque gamepad se voit associé un numéro de série unique sur la plateforme à laquelle il est connecté. Vous pouvez obtenir ce numéro sous la forme d'une chaîne de caractères en utilisant la fonction `gamepad_get_guid`. Elle prend en paramètre l'indice du gamepade à accéder.
+
+```js
+var gamepad_GUID = gamepad_get_guid(indice_gamepad);
+```
+
+- Si le gamepad n'est pas connecté ou si le numéro est inaccessible, la fonction renvoie `"none"`.
+- Si l'indice passé n'est pas dans la limite prise en charge par la plateforme, la fonction renvoie `"device index out of range"`.
+
+Cette fonction est souvent utilisée en conjonction avec la fonction `gamepad_get_description` pour remapper les boutons d'un gamepad.
+
+###### Obtenir le nombre de directions
+
+La fonction `gamepad_hat_count` renvoie le nombre de directions (*hats*) fournies par un gamepad DirectInput. Elle prend en paramètre l'indice du gamepad à accéder.
+
+```js
+var nombre_direction_gamepad = gamepad_hat_count(indice_gamepad);
+```
+
+**Attention !** Cette fonction n'est disponible que pour les gamepads DirectInput. Vous ne pouvez donc utiliser qu'un indice de gamepad compris entre `4` et `11`.
+
+###### Obtenir la valeur d'une direction
+
+La fonction `gamepad_hat_value` renvoie la valeur (entre `0` et `1`) d'une direction (*hat*) d'un gamepad Directinput. Elle prend en paramètre :
+
+- L'indice du gamepad à accéder.
+- Un masque de bit correspondant à une ou plusieurs directions (vous pouvez combiner plusieurs directions).
+  - `1` (motif binaire `0001`) pour haut
+  - `2` (motif binaire `0010`) pour droite
+  - `4` (motif binaire `0100`) pour bas
+  - `8` (motif binaire `1000`) pour gauche
+
+```js
+var valeur_direction = gamepad_hat_value(indice_gamepad, masque_bit_direction);
+```
+
+##### Sticks analogiques
+
+###### Obtenir le nombre d'axes disponibles
+
+La fonction `gamepad_axis_count` renvoie le nombre d'axes disponibles sur le gamepad. Le paramètre correspond à l'indice du gamepad. Sur un gamepad classique à deux sticks analogiques, le nombre d'axes disponible est de quatre.
+
+```js
+if (gamepad_axis_count(indice_gamepad) == 4) {
+    // instructions
+}
+```
+
+###### Obtenir la valeur d'un axe
+
+La fonction `gamepad_axis_value` renvoie la valeur d'un axe de stick d'un gamepad.
+
+- Le premier paramètre correspond à l'indice du gamepad.
+- Le second paramètre correspond à l'indice de l'axe à accéder. En général, vous utiliserez les quatre constantes prédéfinies associées à une direction d'un des deux sticks possibles mais pour des gamepads plus "exotiques", vous pouvez également utiliser un indice compris entre `0` et `gamepad_axis_count(indice_gamepad) - 1`.
+  - `gp_axislh` pour stick gauche direction horizontale.
+  - `gp_axislv` pour stick gauche direction verticale.
+  - `gp_axisrh` pour stick droit direction horizontale.
+  - `gp_axisrv` pour stick droit direction verticale).
+
+
+```js
+if (gamepad_is_connected(indice_gamepad))
+{
+    var stickGaucheHorizontal = gamepad_axis_value(indice_gamepad, gp_axislh);
+    var stickGaucheVertical = gamepad_axis_value(indice_gamepad, gp_axislv);
+    var stickDroitHorizontal = gamepad_axis_value(indice_gamepad, gp_axisrh);
+    var stickDroitVertical = gamepad_axis_value(indice_gamepad, gp_axisrv);
+}
+```
+
+###### Obtenir la zone morte des axes
+
+La fonction `gamepad_get_axis_deadzone` renvoie la valeur de la zone morte des axes d'un gamepad. elle prend en paramètre l'indice du gamepad à accéder.
+
+```js
+var zone_morte_axes = gamepad_get_axis_deadzone(indice_gamepad);
+```
+
+###### Définir la zone morte des axes
 
 Un stick au repos n'a jamais de valeur horizontale et verticale totalement nulle. Pour éviter de gérer ces valeurs parasites, la fonction `gamepad_set_axis_deadzone` vous permet de paramétrer la zone morte des sticks d'un gamepad. Placez-la dans un évènement `Create` et passez-lui comme argument l'indice du gamepad et une valeur limite comprise en `0` et `1` (`0.2` par exemple). Les valeurs comprises entre `0` et cette limite seront considérées comme nulles.
 
 ```js
-gamepad_set_axis_deadzone(indice_de_gamepad, valeur);
+if (gamepad_get_axis_deadzone(indice_gamepad) > valeur) {
+    gamepad_set_axis_deadzone(indice_gamepad, valeur);
+}
 ```
+
+Vous pouvez également traiter les sticks analogiques comme de simples boutons (pour un déplacement sur huit directions par exemple). consultez la section suivante pour ce genre d'utilisation.
+
+##### Boutons et croix de direction
+
+###### Obtenir le nombre de boutons
+
+La fonction `gamepad_button_count` renvoie le nombre de boutons dont dispose un gamepad.
+
+```js
+var nombre_boutons_gamepad = gamepad_button_count(indice_gamepad);
+```
+
+###### Obtenir l'état des boutons
 
 La fonction `gamepad_button_check_` renvoie un booléen indiquant si un bouton est enfoncé dans le step actuel.
 La fonction `gamepad_button_check_pressed` renvoie un booléen indiquant si un bouton vient d'être enfoncé dans le step actuel.
 La fonction `gamepad_button_check_released` renvoie un booléen indiquant si un bouton vient d'être relâché dans le step actuel.
 
-Elle prend en paramètre l'indice du gamepad et une constante prédéfinie correspondant à un bouton de gamepad :
+Ces fonctions prennent en paramètres :
 
-- `gp_padl` correspond à la direction gauche de la croix directionnelle.
-- `gp_padr` correspond à la direction droite de la croix directionnelle.
-- `gp_padu` correspond à la direction haute de la croix directionnelle.
-- `gp_padd` correspond à la direction basse de la croix directionnelle.
-- `gp_axislh` correspond à la direction horizontale du stick gauche.
-- `gp_axislv` correspond à la direction verticale du stick gauche.
-- `gp_axisrh` correspond à la direction horizontale du stick droit.
-- `gp_axisrv` correspond à la direction verticale du stick droit.
-- `gp_stickl` correspond au clic du stick gauche.
-- `gp_stickr` correspond au clic du stick droit.
-- `gp_select` correspond au bouton *Select*.
-- `gp_start` correspond au bouton *Start*.
-- `gp_face1` correspond au bouton *A* d'une manette Xbox (bas).
-- `gp_face2` correspond au bouton *B* d'une manette Xbox (droite).
-- `gp_face3` correspond au bouton *X* d'une manette Xbox (gauche).
-- `gp_face4` correspond au bouton *Y* d'une manette Xbox (haut).
-- `gp_shoulderl` correspond au bouton *LB* d'une manette Xbox (L1).
-- `gp_shoulderlb` correspond au bouton *LT* d'une manette Xbox (L2).
-- `gp_shoulderr` correspond au bouton *RB* d'une manette Xbox (R1).
-- `gp_shoulderrb` correspond au bouton *RT* d'une manette Xbox (R2).
+- l'indice du gamepad.
+- Une constante prédéfinie correspondant à un bouton de gamepad :
+  - `gp_padl` correspond à la direction gauche de la croix directionnelle.
+  - `gp_padr` correspond à la direction droite de la croix directionnelle.
+  - `gp_padu` correspond à la direction haute de la croix directionnelle.
+  - `gp_padd` correspond à la direction basse de la croix directionnelle.
+  - `gp_axislh` correspond à la direction horizontale du stick gauche.
+  - `gp_axislv` correspond à la direction verticale du stick gauche.
+  - `gp_axisrh` correspond à la direction horizontale du stick droit.
+  - `gp_axisrv` correspond à la direction verticale du stick droit.
+  - `gp_stickl` correspond au clic du stick gauche.
+  - `gp_stickr` correspond au clic du stick droit.
+  - `gp_select` correspond au bouton *Select*.
+  - `gp_start` correspond au bouton *Start*.
+  - `gp_face1` correspond au bouton *A* d'une manette Xbox (bas).
+  - `gp_face2` correspond au bouton *B* d'une manette Xbox (droite).
+  - `gp_face3` correspond au bouton *X* d'une manette Xbox (gauche).
+  - `gp_face4` correspond au bouton *Y* d'une manette Xbox (haut).
+  - `gp_shoulderl` correspond au bouton *LB* d'une manette Xbox (L1).
+  - `gp_shoulderlb` correspond au bouton *LT* d'une manette Xbox (L2).
+  - `gp_shoulderr` correspond au bouton *RB* d'une manette Xbox (R1).
+  - `gp_shoulderrb` correspond au bouton *RT* d'une manette Xbox (R2).
 
-![disposition des touches](gms2_gamepad_constants.png)
+![gamepad et constantes associées](gms2_gamepad_constants.png)
 
 ```js
 if (gamepad_is_connected(0))
@@ -1527,6 +1648,38 @@ if (gamepad_is_connected(0))
 }
 ```
 
+###### Obtenir la zone morte des boutons analogiques
+
+La fonction `gamepad_get_button_threshold` renvoie la zone morte (entre `0` et `1`) des boutons analogiques. Cette valeur définit la limite de la valeur des boutons analogiques qui doit être dépassée pour que le bouton soit considéré comme enfoncé. La valeur par défaut est de `0.5`. Cette fonction prend en paramètre l'indice du gamepad à accéder.
+
+```js
+var zone_morte_boutons = gamepad_get_button_threshold(indice_gamepad);
+```
+
+###### Définir la zone morte des boutons analogiques
+
+La fonction `gamepad_set_button_threshold` définit la zone morte des boutons analogiques. Elle prend en paramètres :
+
+- L'indice du gamepad à paramétrer.
+- La valeur de la zone morte (entre `0` et `1`).
+
+```js
+gamepad_set_button_threshold(indice_gamepad, zone_morte_boutons);
+```
+
+###### Obtenir la valeur des boutons analogiques
+
+La fonction `gamepad_button_value` renvoie la valeur (entre `0` et `1`) d'un bouton analogique. Elle prend en paramètres :
+
+- l'indice du gamepad.
+- Une constante prédéfinie correspondant à un bouton de gamepad.
+
+```js
+gamepad_button_value(device, button);
+```
+
+##### Simuler l'appui d'une touche du clavier
+
 Pour combiner la gestion du gamepad avec une gestion du clavier, vous pouvez simuler l'appui d'une touche du clavier avec la fonction `keyboard_key_press`.
 
 ```js
@@ -1538,6 +1691,75 @@ if (buttonAPressed)
 ```
 
 **Attention !** Cette fonction simule l'appui d'une touche de manière permanente. Pensez à appeler aussitôt la fonction `keyboard_key_release` pour simuler le relâchement de la touche.
+
+###### Contrôler la vibration
+
+La fonction `gamepad_set_vibration` vous permet de contrôler la quantité de vibration des moteurs droit et gauche d'un gamepad. Elle prend en paramètres :
+
+- L'indice du gamepad.
+- L'intensité de la vibration (une valeur entre `0` (pas de vibration) et `1` (vibration maximale)) du moteur gauche.
+- L'intensité de la vibration (une valeur entre `0` (pas de vibration) et `1` (vibration maximale)) du moteur droit.
+
+```js
+gamepad_set_vibration(indice_gamepad, vibration_moteur_gauche, vibration_moteur_droit);
+```
+
+**Remarque :** Cette fonction actionne les moteurs de vibration du gamepad de manière continue. Pensez à remettre à zéro l'intensité de vibration des moteurs après usage pour stopper la vibration.
+
+**Attention !** Cette fonction n'est prise en charge que pour les plateformes Windows, PS4 et XBox One.
+
+##### Définir la couleur des LEDS du gamepad PS4
+
+La fonction `gamepad_set_colour` vous permet d'attribuer une couleur aux LEDs d'une manette PS4.
+
+```js
+gamepad_set_colour(indice_gamepad, couleur);
+```
+
+###### Fonctions avancées
+
+Les fonctions suivantes sont relativement complexes et je ne les maîtrise pas bien. Pour plus d'informations, consultez la documentation officielle.
+
+La fonction `gamepad_get_mapping` renvoie une chaîne de caractères contenant les informations de mapping des touches d'un gamepad.
+
+```js
+var mapping_gamepad = gamepad_get_mapping(indice_gamepad);
+```
+
+La fonction `gamepad_remove_mapping` supprime le mapping actuel des touches d'un gamepad.
+
+```js
+gamepad_remove_mapping(indice_gamepad);
+```
+
+La fonction `gamepad_test_mapping` vous permet de modifier le mapping des touches d'un gamepad.
+
+```js
+gamepad_test_mapping(indice_gamepad, chaine_nouveau_mapping);
+```
+
+La fonction `gamepad_get_option` renvoie l'information d'une option spécifique. Elle prend en paramètres :
+
+- L'indice du gamepad.
+- Un nom d'option (sous forme de chaîne de caractères) parmi :
+  - "allow_rotation".
+  - "dpad_absolute".
+
+```js
+gamepad_get_option(indice_gamepad, nom_option);
+```
+
+La fonction `gamepad_set_option` modifie l'information d'une option spécifique. Elle prend en paramètres :
+
+- L'indice du gamepad.
+- Un nom d'option (sous forme de chaîne de caractères) parmi :
+  - "allow_rotation".
+  - "dpad_absolute".
+  - La valeur à attribuer à l'option.
+
+```js
+gamepad_set_option(indice_gamepad, nom_option, valeur);
+```
 
 ### Génération aléatoire
 
