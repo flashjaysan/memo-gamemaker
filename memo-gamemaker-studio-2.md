@@ -158,49 +158,53 @@ GameMaker Studio 2 est proposé en différentes versions.
   - Vous ne pouvez pas exporter vos jeux.
   - Vous ne pouvez pas désactiver la notification de la version d'essai.
   - Vous ne pouvez pas créer de compte Marketplace Publisher mais vous pouvez utiliser votre compte Yoyo Games pour accéder au contenu du Marketplace.
-- La version **Creator** à 39€ par an vous permet d'exporter votre jeu soit pour Windows soit pour Mac OS selon la version que vous avez choisie.
+- La version **Creator** à 39 € par an vous permet d'exporter votre jeu soit pour Windows soit pour Mac OS selon la version que vous avez choisie.
   - Vous ne pouvez pas supprimer l'écran splash par défaut.
   - Vous ne pouvez exporter votre jeu qu'avec la machine virtuelle.
   - Cette licence moins cher ne dure toutefois qu'un an.
-- La version **Desktop** à 99€ vous permet d'exporter votre jeu pour Windows, Mac OS, et Ubuntu.
+- La version **Desktop** à 99 € vous permet d'exporter votre jeu pour Windows, Mac OS, et Ubuntu.
   - Vous pouvez exporter votre jeu sur les trois plateformes en utilisant la machine virtuelle ou le compilateur natif YYC.
   - Cette licence est permanente.
-- La version **Web** à 149€ vous permet d'exporter votre jeu pour HTML5.
-  - Votre jeu est exporté en JavaScript.
+- La version **Web** à 149 € vous permet d'exporter votre jeu pour HTML5.
+  - Vous pouvez exporter votre jeu pour le web (en JavaScript).
   - Cette licence est permanente.
-- La version **UWP** à 199€ vous permet d'exporter votre jeu pour la plateforme Microsoft Universal Windows Platform ainsi que le programme Xbox One Creators.
+- La version **UWP** à 199 € vous permet d'exporter votre jeu pour la plateforme Microsoft Universal Windows Platform ainsi que le programme Xbox One Creators.
   - Vous pouvez exporter votre jeu en utilisant la machine virtuelle ou le compilateur natif YYC.
   - Cette licence est permanente.
-- La version **Mobile** à 199€ vous permet d'exporter votre jeu pour Android, Fire et iOS.
+- La version **Mobile** à 199 € vous permet d'exporter votre jeu pour Android, Fire et iOS.
   - Vous pouvez exporter votre jeu sur les trois plateformes en utilisant la machine virtuelle ou le compilateur natif YYC.
   - Cette licence est permanente.
-- La version **PS4** à 799€ par an vous permet d'exporter votre jeu pour la console PS4.
-  - Vous devez un posséder un compte de développeur Sony.
+- La version **PS4** à 799 € par an vous permet d'exporter votre jeu pour la console PS4 de Sony.
+  - Vous devez posséder un compte de développeur Sony.
   - Cette licence ne dure qu'un an.
-- La version **Xbox One** à 799€ par an vous permet d'exporter votre jeu pour la console Xbox One.
-  - Vous devez un posséder un compte de développeur Microsoft.
+- La version **Xbox One** à 799 € par an vous permet d'exporter votre jeu pour la console Xbox One de Microsoft.
+  - Vous devez posséder un compte de développeur Microsoft.
   - Cette licence ne dure qu'un an.
-- La version **Switch** à 799€ par an vous permet d'exporter votre jeu pour la console Switch.
-  - Vous devez un posséder un compte de développeur Nintendo.
+- La version **Switch** à 799 € par an vous permet d'exporter votre jeu pour la console Switch de Nintendo.
+  - Vous devez posséder un compte de développeur Nintendo.
   - Cette licence ne dure qu'un an.
-- La version **Ultimate** à 1500€ par an vous permet d'exporter votre jeu pour toutes les consoles précédentes.
+- La version **Ultimate** à 1500 € par an vous permet d'exporter votre jeu pour toutes les plateformes précédentes.
   - Vous pouvez exporter sur toutes les plateformes possibles.
-  - Vous devez un posséder un compte de développeur Sony, Microsoft et Nintendo.
+  - Pour exporter sur PS4 vous devez posséder un compte de développeur Sony.
+  - Pour exporter sur Xbox One vous devez posséder un compte de développeur Microsoft.
+  - Pour exporter sur Switch vous devez posséder un compte de développeur Nintendo.
   - Cette licence ne dure qu'un an.
+
+**Remarque :** Les prix listés correspondent au prix hors promotion. Comme ils sont relativement couteux, surveillez le site officiel, Humble Bundle et Steam pour vous procurer ces licenses un peu moins cher.
 
 ## Concepts de base
 
-Dans GameMaker Studio 2, un jeu est essentiellement constitué de ressources appelées *rooms*. Ce sont les écrans ou niveaux de votre jeu. Chaque room comporte à son tour des *instances* de ressources appelées *objects*. Les objects définissent les interactions possibles dans votre jeu et les instances en sont des exemplaires indépendants interagissant dans une room.
+Dans GameMaker Studio 2, un jeu est essentiellement constitué de ressources appelées *rooms*. Ce sont les écrans ou niveaux de votre jeu. Chaque room comporte à son tour des *instances* de ressources appelées *objects*. Les objets définissent les interactions possibles dans votre jeu et les instances en sont des exemplaires indépendants interagissant dans une room.
 
 **Remarque :** GameMaker Studio 2 fournit une room vide appelée `room0` pour tout nouveau projet.
 
-Les instances d'objects interagissent entre elles par le biais de programmes GML (ou d'actions DND mais cela revient au même) attachés à des *évènements*. Les évènements déclenchent l'exécution des programmes GML.
+Les instances d'objets interagissent entre elles par le biais de programmes GML (ou d'actions DND mais cela revient au même) attachés à des *évènements*. Les évènements déclenchent l'exécution des programmes GML.
 
-Pour afficher quelque chose à l'écran, un object utilise généralement une ou plusieurs ressources appelées *sprites*. Les sprites correspondent aux éléments graphiques de votre jeu. Un sprite peut être une simple image fixe ou une série d'images animées.
+Pour afficher quelque chose à l'écran, un objet utilise généralement une ou plusieurs ressources appelées *sprites*. Les sprites correspondent aux éléments graphiques de votre jeu. Un sprite peut être une simple image fixe ou une série d'images animées.
 
 Les *sounds* correspondent aux éléments audio de votre jeu. Un sound peut représenter un son ou une musique.
 
-Les ressources object, sprite et sound sont les plus importantes mais GameMaker Studio 2 fournit de nombreux autres types de ressources pour vous aider à concevoir votre jeu.
+Les ressources objets, sprites et sons sont les plus importantes mais GameMaker Studio 2 fournit de nombreux autres types de ressources pour vous aider à concevoir votre jeu.
 
 ### Système de coordonnées et angles
 
@@ -211,12 +215,10 @@ L'axe vertical (Y) augmente vers le bas. L'origine d'une room (à la coordonnée
 ### Créer un nouveau projet
 
 - Sur l'écran de démarrage, cliquez sur le bouton `New`. Si cet écran n'est pas visible, vous pouvez également utiliser le menu `File -> New Project` ou les touches `CTRL+N`.
-
 - Vous devez ensuite choisir entre *GML* et *DND* en cliquant sur les boutons correspondants. Si vous n'êtes pas totalement débutant, je vous conseille d'utiliser *GML*.
-
 - Enfin, sélectionnez un emplacement sur votre ordinateur et donnez un nom à votre projet.
 
-**Remarque :** Les actions *DND* sont converties automatiquement en *GML* lorsque vous exportez votre jeu. Vous pouvez à tout moment demander à voir la conversion en *GML* (sans convertir définitivement le script *DND*) en faisant un clic droit sur le script *DND* et en choisissant l'option `Live Preview`. Vous pouvez également demander la conversion définitive d'un script *DND* en faisant un clic droit sur l'évènement et en choisissant l'option `Convert to GML`.
+**Remarque :** Les actions *DND* sont converties automatiquement en *GML* lorsque vous exportez votre jeu. Vous pouvez à tout moment demander à voir la conversion en *GML* (sans convertir définitivement le script *DND*) en faisant un clic droit sur les actions *DND* et en choisissant l'option `Live Preview`. Vous pouvez également demander la conversion définitive d'un script *DND* en faisant un clic droit sur l'évènement et en choisissant l'option `Convert to GML`.
 
 ### Régler le nombre d'images par seconde
 
@@ -224,11 +226,11 @@ Pour ouvrir le menu de configuration du projet, cliquez sur le bouton `Game Opti
 
 Paramétrez la fréquence de rafraichissement de l'écran de votre jeu (`60` par défaut) à la ligne `Game frames per second`.
 
-**Conseil :** Dans le panneau `Resources`, faites un clic droit sur le dossier `Scripts` et choisissez `Create Script` pour créer un nouveau script. Appelez-le `MACROS.` Dans ce script, saisissez l'instruction' `#macro FRAME_RATE 60`. Cela définit une constante symbolique `FRAME_RATE` dont la valeur est `60` que vous pourrez utiliser partout dans votre projet à la place de la valeur `60`. Si vous modifiez la fréquence de rafraichissement de l'écran de votre jeu, vous n'aurez à modifier cette valeur que dans ce script.
+**Conseil :** Dans le panneau `Resources`, faites un clic droit sur le dossier `Scripts` et choisissez `Create Script` pour créer un nouveau script. Appelez-le `MACROS.`Dans ce script, saisissez l'instruction' `#macro FRAME_RATE 60`. Cela définit une constante symbolique `FRAME_RATE` dont la valeur est `60` que vous pourrez utiliser partout dans votre projet à la place de la valeur en dur `60`. Si vous modifiez la fréquence de rafraichissement de l'écran de votre jeu, vous n'aurez à modifier cette valeur que dans ce script.
 
 ###  Compiler et exécuter le jeu
 
-Cliquez sur le bouton`Run`, cliquez sur le menu `Build -> Run` ou  appuyez sur la touche `F5`.
+Cliquez sur le bouton`Run`, sur le menu `Build -> Run` ou appuyez sur la touche `F5`.
 
 **Conseil :** Testez votre jeu régulièrement.
 
@@ -237,16 +239,12 @@ Cliquez sur le bouton`Run`, cliquez sur le menu `Build -> Run` ou  appuyez sur l
 Par défaut, GameMaker Studio 2 définit la résolution générale du jeu en se basant sur la taille de la première room existante dans le dossier `Rooms` du panneau `Resources`.
 
 - Dans le dossier `Rooms` du panneau `Ressources`, double cliquez sur `room0` (la room créée par défaut) pour l'ouvrir dans l'éditeur. Si vous avez plusieurs rooms dans ce dossier, double cliquez sur la première de la liste.
-
 - Dans la section `Properties` du panneau `Room Editor`, à la sous-section `Room Settings`, définissez les dimensions de la room grâce aux champs `Width` (largeur) et `Height` (hauteur).
 
-**Attention !** Si vous avez activé les *viewports* (en cochant la case `Enable Viewports` dans la sous-section `Viewport and Cameras`) et que des viewports ont leur case `Visible` de cochée, la résolution du jeu sera celle du viewport visible. La résolution du jeu peut donc être différente de la taille de la room (par exemple avec une room très grande où la caméra n'affiche qu'une partie de la room).
+**Attention !** Si vous avez activé les *viewports* (en cochant la case `Enable Viewports` dans la sous-section `Viewport and Cameras`) et que des viewports ont leur case `Visible` de cochée, la résolution du jeu sera celle du viewport visible. La résolution du jeu peut donc être différente de la taille de la room (par exemple avec une room très grande où la caméra n'affiche qu'une partie de la room). De plus, vous pouvez définir une résolution d'affichage du jeu différente de celle de la caméra (par exemple si votre jeu en pixel art a une résolution très faible et que vous souhaitez afficher le jeu avec une résolution supérieure). Pour faire simple, chaque caméra a une résolution de capture de la room et une résolution de rendu dans la fenêtre de jeu. Les deux résolutions sont indépendantes mais veillez bien à ce que la résolution de rendu dans la fenètre soit bien aux même proportions (le rapport largeur/hauteur) que la résolution de capture de la caméra associée sinon votre jeu sera déformé dans la fenêtre.
 
-- Définissez la résolution de ces viewports grâce aux champs `Width` (largeur) et `Height` (hauteur) de la sous-section `Camera Properties` de chaque viewport visible pour définir la résolution.
-
-Vous pouvez également définir une résolution d'affichage du jeu différente de celle du viewport (par exemple si votre jeu en pixel art a une résolution très faible et que vous souhaitez afficher le jeu avec une résolution supérieure).
-
--  Utilisez les champs `Width` (largeur) et `Height` (hauteur) de la sous-section `Viewport Properties` de chaque viewport visible.
+- Pour définir la résolution de capture de la caméra dans la room, utilisez les champs `Width` (largeur) et `Height` (hauteur) de la sous-section `Camera Properties` de chaque viewport visible.
+- Pour définir la résolution de rendu de la caméra dans la fenêtre de jeu, utilisez les champs `Width` (largeur) et `Height` (hauteur) de la sous-section `Viewport Properties` de chaque viewport visible.
 
 ## L'éditeur
 
@@ -277,7 +275,7 @@ Dans le panneau `Resources`, double cliquez sur la ressource à éditer.
 
 ### Les sprites
 
-Bien que vous puissiez utilisez les fonctions de dessin fournies par GameMaker Studio 2 pour afficher des formes géométriques à l'écran, vous aurez généralement besoin d'importer ou de créer des images pour afficher des choses à l'écran.
+Bien que vous puissiez utiliser les fonctions de dessin fournies par GameMaker Studio 2 pour afficher des formes géométriques à l'écran, la plupart du temps vous aurez besoin d'importer ou de créer des images pour afficher des choses à l'écran.
 
 GameMaker Studio 2 embarque un éditeur complet de sprites pour vous permettre de créer vos propre sprites directement dans l'éditeur. Il vous permet également d'importer facilement des fichiers images.
 
@@ -335,14 +333,33 @@ Cliquez sur le bouton `No Sprite` pour sélectionner un sprite existant à attri
 
 Dans le panneau `Resources`, faites un clic droit sur le dossier `Sounds` puis sélectionnez `Create Sound` ou appuyez sur les touches `ALT+U` pour créez un sound.
 
-## Evènements
+## Les Evènements
+
+### Create
+
+L'évènement `Create` se déclenche lorsqu'une instance de l'objet est créée. Le programme qu'il contient ne s'exécute donc qu'une seule fois. Un objet est créé lorsqu'une instance est placée dans une room et que celle-ci est initialisée ou lorsqu'un programme crée une instance manuellement dans son code. Le programme de cet évènement s'exécute après l'initialisation des variables d'objet et d'instance créées dans l'éditeur.
+
+### Destroy
+
+L'évènement `Destroy` se déclenche lorsqu'une instance de l'objet est détruite. Le programme qu'il contient ne s'exécute donc qu'une seule fois juste avant que l'instance ne soit définitivement détruite.
+
+### Clean Up
+
+L'évènement `Clean Up` se déclenche lorsqu'une instance de l'objet est détruite après l'évènement `Destroy`. Le programme qu'il contient ne s'exécute donc qu'une seule fois. Cet évènement est destiné à libérer la mémoire que l'objet aurait réservé durant son existence. Notez que l'objet termine d'exécuter le programme ayant appelé la fonction `instance_destroy` après l'exécution de cet évènement avant de détruire l'objet.
+
+### Step
+
+- L'évènement `Begin Step` se déclenche chaque step avant l'évènement `Step`. Il se répète tant que l'objet existe.
+- L'évènement `Step` se déclenche chaque step après l'évènement `Begin Step` et avant l'évènement `End Step`. Il se répète tant que l'objet existe.
+- L'évènement `End Step` se déclenche chaque step après l'évènement `Step`. Il se répète tant que l'objet existe.
 
 ### Clavier
 
-- Les évènements de la catégorie `Key Down` se déclenchent à chaque frame si une touche est enfoncée.
-- Les évènements de la catégorie `Key Pressed` se déclenchent une seule fois lorsqu'une touche est enfoncée.
+- Les évènements de la catégorie `Key Down` se déclenchent à chaque step si une touche est enfoncée.
+- Les évènements de la catégorie `Key Pressed` se déclenchent une seule fois dans le step où une touche est enfoncée.
+- Les évènements de la catégorie `Key Up` se déclenchent une seule fois dans le step où une touche est relâchée.
 
-### Timers
+### Alarms
 
 Chaque instance d'object a 12 *timers*. La variable d'instance prédéfinie `alarm` est un tableau de 12 éléments. Chaque *frame*, la valeur entière contenue dans chaque élément de ce tableau diminue de `1`. Lorsque la valeur d'un élément du tableau `alarm` atteint `0`, l'évènement `alarm[X]` se déclenche et exécute le script associé à cet évènement.
 
@@ -1455,7 +1472,11 @@ Un stick au repos n'a jamais de valeur horizontale et verticale totalement nulle
 gamepad_set_axis_deadzone(indice_de_gamepad, valeur);
 ```
 
-La fonction `gamepad_button_check_pressed` renvoie un booléen indiquant si un bouton est enfoncé lors de l'appel. Elle prend en paramètre l'indice du gamepad et une constante prédéfinie correspondant à un bouton de gamepad :
+La fonction `gamepad_button_check_` renvoie un booléen indiquant si un bouton est enfoncé dans le step actuel.
+La fonction `gamepad_button_check_pressed` renvoie un booléen indiquant si un bouton vient d'être enfoncé dans le step actuel.
+La fonction `gamepad_button_check_released` renvoie un booléen indiquant si un bouton vient d'être relâché dans le step actuel.
+
+Elle prend en paramètre l'indice du gamepad et une constante prédéfinie correspondant à un bouton de gamepad :
 
 - `gp_padl` correspond à la direction gauche de la croix directionnelle.
 - `gp_padr` correspond à la direction droite de la croix directionnelle.
@@ -1477,6 +1498,8 @@ La fonction `gamepad_button_check_pressed` renvoie un booléen indiquant si un b
 - `gp_shoulderlb` correspond au bouton *LT* d'une manette Xbox (L2).
 - `gp_shoulderr` correspond au bouton *RB* d'une manette Xbox (R1).
 - `gp_shoulderrb` correspond au bouton *RT* d'une manette Xbox (R2).
+
+![disposition des touches](gms2_gamepad_constants.png)
 
 ```js
 if (gamepad_is_connected(0))
